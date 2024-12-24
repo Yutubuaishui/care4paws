@@ -1,87 +1,92 @@
-/*manage resgitration and login for users
-  process data and return response*/
-
-//hashes user's password using bcrypt for security
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
-const register = async (req, res) =>{
-    try{
-        const {email, password, role, username} = req.body;
-        const hashedPassword = await bcrypt.hash(password,10);
+const register = async (req, res) => {
+    try {
+        const { email, password, role, username, firstName, lastName, phoneNumber } = req.body;
 
-        //check if user exist
-        const existUser = await User.findOne({email});
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        const passwordStrengthRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
-        if (existUser){
-            return res.status(400).json({ message: "User with this email already exists" });
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ message: 'Invalid email format.' });
         }
-        
-        //else, create a new user
-        const newUser = new User({email, password: hashedPassword, role, username});
-        await newUser.save();
-        res.status(201).json({message:"User registered successfully"});
-    } catch (err){
-        res
-            .status(500)
-            .json({message:"Something went wrong", error: err.message});
-    }
 
+        if (!passwordStrengthRegex.test(password)) {
+            return res.status(400).json({ message: 'Password must be at least 8 characters long, with at least one letter and one number.' });
+        }
+
+        const existUser = await User.findOne({ email });
+        if (existUser) {
+            return res.status(400).json({ message: 'User with this email already exists.' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = new User({
+            email,
+            password: hashedPassword,
+            role,
+            username,
+            firstName,
+            lastName,
+            phoneNumber
+        });
+
+        await newUser.save();
+        res.status(201).json({ message: 'User registered successfully' });
+    } catch (err) {
+        res.status(500).json({ message: 'Something went wrong', error: err.message });
+    }
 };
 
+
+
 const login = async (req, res) => {
-    try{
-        const {email, password} = req.body;
-        const user = await User.findOne({email});
-    
-        if(!user){
-            return res
-            .status(404)
-            .json({message:`User with email ${email} not found`});
+    try {
+        console.log("Login attempt:", req.body); // Debug log
+
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            console.log("User not found:", email); // Debug log
+            return res.status(404).json({ message: `User with email ${email} not found` });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch){
-            return res
-            .status(400)
-            .json({message:"Invalid credential"});
+        if (!isMatch) {
+            console.log("Invalid password for user:", email); // Debug log
+            return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        //authenticate with JWT, expires in 1 hour
-        const token = jwt.sign({
-            id:user._id, 
-            role: user.role,
-            username: user.username,
-            }, 
+        // Generate JWT
+        const token = jwt.sign(
+            { id: user._id, role: user.role, username: user.username },
             process.env.JWT_SECRET,
-            {expiresIn: "1h"}
+            { expiresIn: "1h" }
+        );
 
-    );
-
-    res.status(200).json({ token });
-
-    } catch(err){
-        res
-            .status(500)
-            .json({message:"Something went wrong", error: err.message});
+        console.log("Login successful for user:", email); // Debug log
+        res.status(200).json({ token, role: user.role });
+    } catch (err) {
+        console.error("Login error:", err.message); // Debug log
+        res.status(500).json({ message: "Something went wrong", error: err.message });
     }
-    
 };
 
-const logout = async(req, res) =>{
-    try{
-        res.clearCookie('token');
-        res.status(200).json({message: "User logout successfully"});
-    } catch (err){
-        res
-            .status(500)
-            .json({message:"Something went wrong", error: err.message});
+
+const logout = async (req, res) => {
+    try {
+        res.clearCookie("token");
+        res.status(200).json({ message: "User logged out successfully" });
+    } catch (err) {
+        res.status(500).json({ message: "Something went wrong", error: err.message });
     }
-}
+};
 
 module.exports = {
-    register, 
+    register,
     login,
-    logout,
+    logout
 };

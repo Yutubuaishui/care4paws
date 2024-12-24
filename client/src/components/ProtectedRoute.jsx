@@ -1,41 +1,65 @@
+import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import { useState, useEffect } from 'react';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
     const token = localStorage.getItem('token');
-    const [notification, setNotification] = useState("");
+    const [decoded, setDecoded] = useState(null);
+    const [notification, setNotification] = useState('');
+    const [redirect, setRedirect] = useState(false);
+
+    useEffect(() => {
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                setDecoded(decodedToken);
+
+                if (!allowedRoles.includes(decodedToken.role)) {
+                    // User doesn't have the right role, show notification and redirect
+                    setNotification('You do not have access to the page.');
+                    setRedirect(true); // Trigger redirect after showing notification
+                }
+            } catch {
+                localStorage.removeItem('token');
+                setNotification('Invalid token. Please log in again.');
+                setRedirect(true); // Trigger redirect after showing notification
+            }
+        } else {
+            setNotification('Please log in to access this page.');
+            setRedirect(true); // Trigger redirect after showing notification
+        }
+    }, [token, allowedRoles]);
 
     useEffect(() => {
         if (notification) {
-            alert(notification); // Display the notification
-            setNotification(""); // Reset after showing
+            const timer = setTimeout(() => {
+                setNotification(''); // Clear notification after timeout
+                setRedirect(true); // Trigger redirection after the alert is shown
+            }, 2000); // 2-second delay
+            return () => clearTimeout(timer);
         }
     }, [notification]);
 
-    if (!token) {
-        setNotification("You are not authenticated. Please log in.");
-        return <Navigate to="/login" />;
-    }
-
-    try {
-        const decodedToken = jwtDecode(token);
-        const userRole = decodedToken.role;
-
-        if (!allowedRoles.includes(userRole)) {
-            setNotification("You do not have access to this page.");
-            // Redirect based on user role
-            if (userRole === "admin") return <Navigate to="/admin" />;
-            if (userRole === "coordinator") return <Navigate to="/coordinator" />;
-            if (userRole === "user") return <Navigate to="/user" />;
+    // Handle redirection if necessary
+    if (redirect) {
+        if (!token) {
+            return <Navigate to="/login" replace />;
         }
-
-        return children;
-    } catch (error) {
-        console.error("Invalid token:", error);
-        setNotification("Invalid token. Please log in again.");
-        return <Navigate to="/login" />;
+        if (decoded && !allowedRoles.includes(decoded.role)) {
+            return <Navigate to={`/${decoded.role}`} replace />;
+        }
     }
+
+    return (
+        <>
+            {notification && (
+                <div style={{ backgroundColor: '#f8d7da', padding: '10px', color: '#721c24' }}>
+                    {notification}
+                </div>
+            )}
+            {children}
+        </>
+    );
 };
 
 export default ProtectedRoute;
