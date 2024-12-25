@@ -8,6 +8,9 @@ import AdminDashboard from './pages/AdminDashboard';
 import CoordinatorDashboard from './pages/CoordinatorDashboard';
 import UserDashboard from './pages/UserDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import Chatbot from "./components/Chatbot";
+//import Homepage from "./components/Homepage";
+import EditProfilePage from "./components/EditProfilePage";
 
 function App() {
     return (
@@ -16,27 +19,39 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                {/* Protected Routes */}
                 <Route
-                    path="/admin"
+                    path="/admin/*"
                     element={
                         <ProtectedRoute allowedRoles={['admin']}>
-                            <AdminDashboard />
+                            <Routes>
+                                <Route path="" element={<AdminDashboard />} />
+                                {/* Add Admin-specific routes */}
+                            </Routes>
                         </ProtectedRoute>
                     }
                 />
                 <Route
-                    path="/coordinator"
+                    path="/coordinator/*"
                     element={
                         <ProtectedRoute allowedRoles={['coordinator']}>
-                            <CoordinatorDashboard />
+                            <Routes>
+                                <Route path="" element={<CoordinatorDashboard />} />
+                                {/* Add Coordinator-specific routes */}
+                            </Routes>
                         </ProtectedRoute>
                     }
                 />
                 <Route
-                    path="/user"
+                    path="/user/*"
                     element={
                         <ProtectedRoute allowedRoles={['user']}>
-                            <UserDashboard />
+                            <Routes>
+                                <Route path="" element={<UserDashboard />} />
+                                <Route path="/be-pet-experts" element={<Chatbot />} />
+                                <Route path="/view-all-pets" element={<Chatbot />} />
+                                <Route path="/edit-profile" element={<EditProfilePage />} />
+                            </Routes>
                         </ProtectedRoute>
                     }
                 />
