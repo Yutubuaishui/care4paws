@@ -11,6 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Chatbot from "./components/Chatbot";
 //import Homepage from "./components/Homepage";
 import EditProfilePage from "./components/EditProfilePage";
+import UserCommunityPage from './pages/CommunityPage/UserCommunity/UserCommunityPage';
 
 function App() {
     return (
@@ -49,8 +50,7 @@ function App() {
                             <Routes>
                                 <Route path="" element={<UserDashboard />} />
                                 <Route path="/be-pet-experts" element={<Chatbot />} />
-                                <Route path="/view-all-pets" element={<Chatbot />} />
-                                <Route path="/edit-profile" element={<EditProfilePage />} />
+                                <Route path="/community" element={<UserCommunityPage />} />
                             </Routes>
                         </ProtectedRoute>
                     }

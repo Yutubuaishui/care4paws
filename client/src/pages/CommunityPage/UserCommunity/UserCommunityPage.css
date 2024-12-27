@@ -1,0 +1,14 @@
+.ParentContainer {
+    display: flex; /* Ensure child alignment */
+    flex-direction: column; /* Stack MiniNavBar and content */
+    padding: 20px; /* Add some spacing */
+  }
+  
+  .TabContent {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(245, 245, 245, 1);
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  

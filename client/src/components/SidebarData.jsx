@@ -42,7 +42,7 @@ export const SidebarData = (role) => {
       {
         title: "Explore Community",
         icon: <img src={CommunityIcon} alt="Community Icon" className="icon" />,
-        link: "/user/home",
+        link: "/user/community",
       },
       {
         title: "Be Pet Experts",

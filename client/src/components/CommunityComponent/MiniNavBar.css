@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .FeedContainer {
+    margin-top: 20px;
+  }
+  
+  .FeedTabs {
+    display: flex;
+    gap: 26px;
+    background: rgba(255, 240, 209, 1);
+    border-radius: 15px;
+    padding: 9px;
+  }
+  
+  .FeedTab {
+    font: 400 20px/1 'Abhaya Libre', -apple-system, Roboto, Helvetica, sans-serif;
+    color: rgba(0, 0, 0, 1);
+    padding: 9px 11px;
+    border-radius: 15px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  
+  .FeedTab.activeTab {
+    background: rgba(121, 87, 87, 1);
+    color: rgba(255, 255, 255, 1);
+  }
