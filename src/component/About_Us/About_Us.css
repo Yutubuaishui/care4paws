@@ -1,0 +1,21 @@
+/* About_Us.css */
+
+body {
+    background-color: #FFF0D1;
+    margin: 0;
+    font-family: 'Abhaya Libre';
+}
+
+.container {
+    background-color: #FFF0D1;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-us-title {
+    font-size: 2.5rem;
+    color: #664343;
+    padding-left: 1000px;
+}

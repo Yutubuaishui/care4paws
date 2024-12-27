@@ -1,6 +1,6 @@
 import React from "react";
 import Landing from "./component/Landing/Landing";
-// import AboutUs from "./components/AboutUs";
+import About_Us from "./component/About_Us/About_Us";
 // import WhatWeOffer from "./components/WhatWeOffer";
 // import Testimonials from "./components/Testimonials";
 // import JoinAsMember from "./components/JoinAsMember";
@@ -10,11 +10,11 @@ function Homepage() {
   return (
     <div>
       <Landing />
-      {/* <AboutUs />
-      <WhatWeOffer />
+      <About_Us />
+      {/* <WhatWeOffer />
       <Testimonials />
       <JoinAsMember />
-      <ContactUs /> */}
+      <ContactUs />  */}
     </div>
   );
 }
