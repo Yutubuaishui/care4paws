@@ -19,6 +19,8 @@ import Donation from "../Assets/donation.png";
 const AdminDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
+  const sidebarData = SidebarData("admin");
+
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
   };
@@ -44,7 +46,7 @@ const AdminDashboard = () => {
       <div className="homebottom">
         <div className={`sidebar ${isSidebarOpen ? "open" : "closed"}`}>
           <ul className="sidebarList">
-            {SidebarData.map((val, key) => {
+            {sidebarData.map((val, key) => {
               return (
                 <li
                   key={key}

@@ -6,37 +6,124 @@ import CommunityIcon from "../Assets/community-icon.svg";
 import EducationIcon from "../Assets/education-hub-icon.svg";
 import DonationIcon from "../Assets/donation-icon.svg";
 
-export const SidebarData = [
-  {
-    title: "Home",
-    icon: <img src={HomeIcon} alt="Home Icon" className="icon" />,
-    link: "/home",
-  },
-  {
-    title: "Discover Cute Pet",
-    icon: <img src={AdoptIcon} alt="Adopt Icon" className="icon" />,
-    link: "/home",
-  },
-  {
-    title: "Lost and Found Corner",
-    icon: (
-      <img src={LostAndFoundIcon} alt="Lost and Found Icon" className="lostAndFoundIcon" />
-    ),
-    link: "/home",
-  },
-  {
-    title: "Explore Community",
-    icon: <img src={CommunityIcon} alt="Community Icon" className="icon" />,
-    link: "/home",
-  },
-  {
-    title: "Be Pet Experts",
-    icon: <img src={EducationIcon} alt="Education Icon" className="icon" />,
-    link: "/be-pet-experts",
-  },
-  {
-    title: "Donation",
-    icon: <img src={DonationIcon} alt="Donation Icon" className="icon" />,
-    link: "/home",
-  },
-];
+export const SidebarData = (role) => {
+  console.log("current role:", role);
+  const baseData = [
+    {
+      title: "Home",
+      icon: <img src={HomeIcon} alt="Home Icon" className="icon" />,
+      link:
+        role === "user"
+          ? "/user"
+          : role === "coordinator"
+          ? "/coordinator"
+          : "/admin",
+    },
+  ];
+
+  if (role === "user") {
+    baseData.push(
+      {
+        title: "Discover Cute Pet",
+        icon: <img src={AdoptIcon} alt="Adopt Icon" className="icon" />,
+        link: "/user/home",
+      },
+      {
+        title: "Lost and Found Corner",
+        icon: (
+          <img
+            src={LostAndFoundIcon}
+            alt="Lost and Found Icon"
+            className="lostAndFoundIcon"
+          />
+        ),
+        link: "/user/home",
+      },
+      {
+        title: "Explore Community",
+        icon: <img src={CommunityIcon} alt="Community Icon" className="icon" />,
+        link: "/user/home",
+      },
+      {
+        title: "Be Pet Experts",
+        icon: <img src={EducationIcon} alt="Education Icon" className="icon" />,
+        link: "/user/be-pet-experts",
+      },
+      {
+        title: "Donation",
+        icon: <img src={DonationIcon} alt="Donation Icon" className="icon" />,
+        link: "/user/home",
+      }
+    );
+  } else if (role === "coordinator") {
+    baseData.push(
+      {
+        title: "Discover Cute Pet",
+        icon: <img src={AdoptIcon} alt="Adopt Icon" className="icon" />,
+        link: "/coordinator/home",
+      },
+      {
+        title: "Lost and Found Corner",
+        icon: (
+          <img
+            src={LostAndFoundIcon}
+            alt="Lost and Found Icon"
+            className="lostAndFoundIcon"
+          />
+        ),
+        link: "/coordinator/home",
+      },
+      {
+        title: "Explore Community",
+        icon: <img src={CommunityIcon} alt="Community Icon" className="icon" />,
+        link: "/coordinator/home",
+      },
+      {
+        title: "Be Pet Experts",
+        icon: <img src={EducationIcon} alt="Education Icon" className="icon" />,
+        link: "/coordinator/be-pet-experts",
+      },
+      {
+        title: "Donation",
+        icon: <img src={DonationIcon} alt="Donation Icon" className="icon" />,
+        link: "/coordinator/home",
+      }
+    );
+  } else if (role === "admin") {
+    baseData.push(
+      {
+        title: "Discover Cute Pet",
+        icon: <img src={AdoptIcon} alt="Adopt Icon" className="icon" />,
+        link: "/admin/home",
+      },
+      {
+        title: "Lost and Found Corner",
+        icon: (
+          <img
+            src={LostAndFoundIcon}
+            alt="Lost and Found Icon"
+            className="lostAndFoundIcon"
+          />
+        ),
+        link: "/admin/home",
+      },
+      {
+        title: "Explore Community",
+        icon: <img src={CommunityIcon} alt="Community Icon" className="icon" />,
+        link: "/admin/home",
+      },
+      {
+        title: "Be Pet Experts",
+        icon: <img src={EducationIcon} alt="Education Icon" className="icon" />,
+        link: "/admin/be-pet-experts",
+      },
+      {
+        title: "Donation",
+        icon: <img src={DonationIcon} alt="Donation Icon" className="icon" />,
+        link: "/admin/home",
+      }
+    );
+  }
+
+  return baseData;
+};
