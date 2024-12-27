@@ -68,6 +68,8 @@ const login = async (req, res) => {
         );
 
         console.log("Login successful for user:", email); // Debug log
+        const userdata = await User.findById(user._id).select("-password");
+        console.log("Authenticated user data:", userdata); // Debug log
         res.status(200).json({ token, role: user.role });
     } catch (err) {
         console.error("Login error:", err.message); // Debug log

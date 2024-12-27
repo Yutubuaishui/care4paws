@@ -1,3 +1,5 @@
+/*define endpoints based on role*/
+
 const express = require("express");
 const verifyToken = require("../middlewares/authMiddleware");
 const authorizeRoles = require("../middlewares/roleMiddleware");
@@ -9,12 +11,12 @@ router.get("/admin", verifyToken, authorizeRoles("admin"), (req,res) => {
 });
 
 //Only admin and coordinator can access this router
-router.get("/coordinator", verifyToken, authorizeRoles("admin", "coordinator"), (req,res) => {
+router.get("/coordinator", verifyToken, authorizeRoles("coordinator"), (req,res) => {
     res.json({message: "Welcome Coordinator"});
 });
 
 //Only admin and user can access this router
-router.get("/user", verifyToken, authorizeRoles("admin", "user"), (req,res) => {
+router.get("/user", verifyToken, authorizeRoles("user"), (req,res) => {
     res.json({message: "Welcome User"});
 });
 

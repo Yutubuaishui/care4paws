@@ -5,9 +5,10 @@ const cors = require("cors");
 //database connection
 const dbConnect = require("./config/dbConnect");
 
-
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const communityPostRoutes = require("./routes/communityPostRoutes");
+
 
 dbConnect();
 
@@ -26,9 +27,10 @@ app.use(
 //Routes
 app.use("/api/auth", authRoutes); //handling authentication, request to /api/auth send to authRoutes
 app.use("/api/users", userRoutes); //handling users, users is the API endpoints
+app.use("/api/communityPost", communityPostRoutes); //handling community module
 
 app.get('/',(req,res)=>{
-    res.send('test')
+    res.send('Welcome to Care4Paws')
 })
 
 //Start the server

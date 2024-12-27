@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SidebarData } from "../components/SidebarData";
 import { Link } from "react-router-dom";
-import "./UserDashboard.css";
+import "./Dashboard.css";
 import Logo from "../Assets/logo.png";
 import NotificationIcon from "../Assets/notification-icon.svg";
 import Chaticon from "../Assets/chat-icon.svg";

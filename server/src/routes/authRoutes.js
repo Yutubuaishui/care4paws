@@ -1,4 +1,4 @@
-/*define endpoints*/
+/*define endpoints for authentication*/
 
 const express = require("express");
 const { register, login, logout } = require("../controllers/authController")
