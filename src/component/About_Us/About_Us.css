@@ -1,21 +1,47 @@
-/* About_Us.css */
-
 body {
     background-color: #FFF0D1;
     margin: 0;
     font-family: 'Abhaya Libre';
 }
 
-.container {
-    background-color: #FFF0D1;
-    padding: 20px;
-    margin: 0 auto;
+.common-container {
     max-width: 1200px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 500px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.about-us-content {
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+    justify-content: space-between; /* Space between left and right content */
+    text-align: left; /* Align text to the left */
+    width: 100%;
+}
+
+.about-us-left {
+    display: flex;
+    flex-direction: column; /* Stack title and text vertically */
+    align-items: flex-start; /* Align items to the start (left) */
 }
 
 .about-us-title {
     font-size: 2.5rem;
     color: #664343;
-    padding-left: 1000px;
+    margin-bottom: 20px; /* Add space between title and text */
+}
+
+.about-us-text {
+    font-size: 1.5rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.about-us-image {
+    width: 470px;
+    border-radius: 30px;
+    margin-left: 100px; 
 }
