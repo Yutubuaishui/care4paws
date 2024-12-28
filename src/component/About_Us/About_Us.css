@@ -30,13 +30,13 @@ body {
 
 .about-us-title {
     font-size: 2.5rem;
-    color: #664343;
+    color: #000000;
     margin-bottom: 20px; /* Add space between title and text */
 }
 
 .about-us-text {
     font-size: 1.5rem;
-    color: #333;
+    color: #664343;
     line-height: 1.6;
 }
 

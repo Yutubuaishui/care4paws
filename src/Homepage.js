@@ -1,7 +1,7 @@
 import React from "react";
 import Landing from "./component/Landing/Landing";
 import About_Us from "./component/About_Us/About_Us";
-// import WhatWeOffer from "./components/WhatWeOffer";
+import WhatWeOffer from "./component/WhatWeOffer/WhatWeOffer";
 // import Testimonials from "./components/Testimonials";
 // import JoinAsMember from "./components/JoinAsMember";
 // import ContactUs from "./components/ContactUs";
@@ -11,10 +11,10 @@ function Homepage() {
     <div>
       <Landing />
       <About_Us />
-      {/* <WhatWeOffer />
-      <Testimonials />
+      <WhatWeOffer />
+      {/* <Testimonials />
       <JoinAsMember />
-      <ContactUs />  */}
+      <ContactUs />   */}
     </div>
   );
 }
