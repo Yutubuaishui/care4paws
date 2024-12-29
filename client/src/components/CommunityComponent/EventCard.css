@@ -1,0 +1,151 @@
+.event-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease;
+    overflow: hidden;
+    margin-bottom: 20px;
+    width: fit-content;
+  }
+  
+  .event-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .event-card-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    align-items: center;
+  }
+  
+  .organizer-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .organizer-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .organizer-name {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .event-type {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  
+  .event-card-body {
+    display: flex;
+    padding: 15px;
+  }
+  
+  .event-pic {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
+  }
+  
+  .event-details {
+    flex: 1;
+  }
+  
+  .event-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .event-date-time {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  .event-fee {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+  }
+  
+  .event-card-footer {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f8f8;
+  }
+  
+  .event-status {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .event-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .event-tag {
+    background-color: #e0e0e0;
+    color: #555;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+  
+  .event-share {
+    cursor: pointer;
+    color: #007bff;
+    display: flex;
+    align-items: center;
+  }
+  
+  .event-share:hover {
+    color: #0056b3;
+  }
+  
+  .event-share svg {
+    margin-right: 5px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .event-card {
+      flex-direction: column;
+    }
+  
+    .event-card-body {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .event-pic {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .event-details {
+      text-align: center;
+    }
+  }
+  

@@ -16,6 +16,7 @@ import MyFeed from "./UserMyFeed";
 import ExploreCommunity from "./UserExploreCommunity";
 import Event from "./UserEvent";
 import "./UserCommunityPage.css"
+import RecommendationBox from "../../../components/CommunityComponent/RecommendationBox";
 
 
 function UserCommunityPage() {
@@ -27,8 +28,9 @@ const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
 };
 
+//state to track which tab is active
 const [activeTab, setActiveTab] = useState("myFeed");
-
+//function to render the correct content based on activeTab
 const renderTabContent = () => {
   switch (activeTab) {
     case "myFeed":
@@ -97,62 +99,35 @@ return (
             />
           </div>
         </div>
-        {/* <div className="wrappingModule">
-          <div className="wrappingleft">
-            <div className="wlt">
-              <p className="bigText">
-                Be the Light in Their Life: Help Homeless Animals Find a Safe
-                Haven
-              </p>
-              <img src={Adopt1} alt="" className="bigTextImage" />
+          <div className="PageContent">
+            <MiniNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
+            <div className="belowMNB">
+            <div
+              className="MainContainer"
+              style={{
+                width:
+                  activeTab === "myFeed"
+                    ? isSidebarOpen
+                      ? '1100px'
+                      : '1250px'
+                    : isSidebarOpen
+                        ? '1500px'
+                        : '1650px'
+              }}
+            >
+              <div className="TabContent">{renderTabContent()}</div>
             </div>
-            <div className="wlm">
-              <p className="text">
-                Looking for a loyal companion? Caesie is ready to join your
-                family today!
-              </p>
-              <div className="galleryImages">
-                <img src={Adopt2} alt="" />
-                <img src={Adopt3} alt="" />
-                <img src={Adopt4} alt="" />
+              {activeTab === "myFeed" && ( // Conditionally render SideContainer
+              <div className="SideContainer">
+                <div>
+                  <RecommendationBox />
+                  <RecommendationBox />
+                </div>
               </div>
-            </div>
-            <div className="wlb">
-              <Link to="/view-all-pets">
-                <button>View All Pets</button>
-              </Link>
-              <Link to="/adopt-pet">
-                <button>Adopt Them</button>
-              </Link>
-            </div>
+            )}
           </div>
-          <div className="wrappingright">
-            <div className="donation">
-              <p>Your Donation Saves Lives</p>
-              <img src={Donation} alt="" />
-              <Link to="/donate">
-                <button>Donate Now</button>
-              </Link>
-            </div>
-            <div className="lostAndFound">
-              <p>Lost and Found</p>
-              <div className="lafimages">
-                <img src={Adopt3} alt="" />
-                <img src={LostAndFound} alt="" />
-              </div>
-              <Link to="/lost-and-found">
-                <button>View All</button>
-              </Link>
-            </div>
           </div>
-        </div> */}
-        <div className="ParentContainer">
-      {console.log("Rendering MiniNavBar in UserCommunityPage")}
-      <MiniNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="TabContent">{renderTabContent()}</div>
-    </div>
       </div>
-        <EventCard />
     </div>
   );
 };

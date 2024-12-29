@@ -1,56 +1,113 @@
+@font-face {
+  font-family: AbhayaLibre;
+  src: url(../../fonts/abhaya-libre/);
+}
+
 .postCard {
-    /* Your styles here */
-  }
-  
-  .postHeader {
-    /* Your styles here */
-  }
-  
-  .postAvatar {
-    /* Your styles here */
-  }
-  
-  .userInfo {
-    /* Your styles here */
-  }
-  
-  .displayName {
-    /* Your styles here */
-  }
-  
-  .username {
-    /* Your styles here */
-  }
-  
-  .postImage {
-    /* Your styles here */
-  }
-  
-  .postContent {
-    /* Your styles here */
-  }
-  
-  .description {
-    /* Your styles here */
-  }
-  
-  .postMeta {
-    /* Your styles here */
-  }
-  
-  .dateSeparator {
-    /* Your styles here */
-  }
-  
-  .interactions {
-    /* Your styles here */
-  }
-  
-  .interactionButton {
-    /* Your styles here */
-  }
-  
-  .interactionIcon {
-    /* Your styles here */
-  }
-  
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  background: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.postHeader {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #efefef;
+}
+
+.postAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.userInfo .username {
+  font-family: AbhayaLibre-bold;
+  font-weight: bold;
+  font-size: 18px;
+  color: #262626;
+}
+
+.postImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.postContent {
+  padding: 20px;
+}
+
+.description {
+  font-family: AbhayaLibre;
+  font-size: 20px;
+  color: #262626;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+}
+
+.postMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  color: #8e8e8e;
+  margin-bottom: 10px;
+}
+
+.interactions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.interactionButton {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+.interactionButton img.interactionIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.interactionButton span {
+  font-size: 16px;
+  color: #262626;
+}
+
+.commentsSection {
+  padding: 10px 15px;
+  border-top: 1px solid #efefef;
+}
+
+.comment {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.comment .reply {
+  margin-left: 20px;
+  font-size: 13px;
+  color: #8e8e8e;
+}
+
+.showReply {
+  font-size: 12px;
+  color: #8e8e8e;
+  cursor: pointer;
+  margin-top: 5px;
+}

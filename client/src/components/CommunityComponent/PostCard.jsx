@@ -1,5 +1,7 @@
 import React from 'react';
 import './PostCard.css';
+import { FaRegCommentDots } from "react-icons/fa6";
+import { LuDog } from "react-icons/lu";
 
 export const PostCard = ({ 
   avatarSrc, 
@@ -12,6 +14,10 @@ export const PostCard = ({
   likes,
   comments 
 }) => {
+  const handleLikeClick = () => {
+    console.log('Like button clicked');
+  };
+
   return (
     <div className="postCard">
       <div className="postHeader">
@@ -21,7 +27,7 @@ export const PostCard = ({
           className="postAvatar"
         />
         <div className="userInfo">
-          <div className="displayName">{displayName}</div>
+          {/* <div className="displayName">{displayName}</div> */}
           <div className="username">{username}</div>
         </div>
       </div>
@@ -32,7 +38,7 @@ export const PostCard = ({
           alt={description} 
           className="postImage"
         />
-      )}
+      )} 
       
       <div className="postContent">
         <div className="description">{description}</div>
@@ -42,14 +48,20 @@ export const PostCard = ({
           <div className="date">{date}</div>
         </div>
         <div className="interactions">
-          <button className="interactionButton" aria-label={`${likes} likes`}>
-            <img src="like-icon-url" alt="" className="interactionIcon" />
+            <LuDog
+              className="interactionButton"
+              aria-label={`${likes} likes`}
+              size={30} // Adjust the size of the icon
+              onClick={handleLikeClick} // Add click handler
+            />
             <span>{likes}</span>
-          </button>
-          <button className="interactionButton" aria-label={`${comments} comments`}>
-            <img src="comment-icon-url" alt="" className="interactionIcon" />
+            <FaRegCommentDots
+              className="interactionButton"
+              aria-label={`${comments} comments`}
+              size={30} // Adjust the size of the icon
+              onClick={handleLikeClick} // Add click handler
+            />
             <span>{comments}</span>
-          </button>
         </div>
       </div>
     </div>

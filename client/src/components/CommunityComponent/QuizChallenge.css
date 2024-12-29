@@ -1,0 +1,32 @@
+.PetCareQuiz {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    background-color: #fff;
+    margin: auto;
+  }
+  
+  .QuestionContainer {
+    text-align: center;
+  }
+  
+  .Options button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #f0a500;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .Options button:hover {
+    background-color: #d89000;
+  }
+  
+  .QuizResult {
+    text-align: center;
+  }
+  

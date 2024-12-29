@@ -3,8 +3,6 @@ import "./MiniNavBar.css";
 
 function MiniNavBar({ activeTab, setActiveTab }) {
 
-  console.log("Rendering MiniNavBar:", { activeTab });
-
   const feedTabs = [
     { id: "myFeed", text: "My Feed" },
     { id: "exploreCommunity", text: "Explore Community" },
@@ -16,7 +14,7 @@ function MiniNavBar({ activeTab, setActiveTab }) {
         {feedTabs.map((tab) => (
           <button
             key={tab.id}
-            className={`NavTab ${activeTab === tab.id ? "activeTab" : ""}`}
+            className={`NavTab ${activeTab === tab.id ? "activeTab" : "inactiveTab"}`}
             onClick={() => setActiveTab(tab.id)}
           >
             {tab.text}

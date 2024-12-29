@@ -1,0 +1,11 @@
+.RecBox{
+    margin: 10px 5px;
+    padding: 5px;
+}
+
+.BoxTitle{
+    background-color: rgba(245, 245, 245, 1);
+    padding: 8px;
+    margin:0;
+    border-radius: 8px 8px 0 0;
+}

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: AbhayaLibre-regular;
+  src: url(../../fonts/abhaya-libre/AbhayaLibre-Regular.ttf);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,29 +10,36 @@
     box-sizing: border-box;
   }
 
-  .FeedContainer {
-    margin-top: 20px;
-  }
+.NavTabs{
+  background-color: #FFF0D1;
+  border-radius: 30px;
+  display: flex;
+  flex-shrink: 0;
+  padding: 0;
+  width: fit-content;
+  overflow: auto;
+}
   
-  .FeedTabs {
-    display: flex;
-    gap: 26px;
-    background: rgba(255, 240, 209, 1);
-    border-radius: 15px;
-    padding: 9px;
-  }
-  
-  .FeedTab {
-    font: 400 20px/1 'Abhaya Libre', -apple-system, Roboto, Helvetica, sans-serif;
+  .NavTab {
+    font-size: 18px;
+    font-family: AbhayaLibre-regular;
+    font-weight: 500;
     color: rgba(0, 0, 0, 1);
     padding: 9px 11px;
     border-radius: 15px;
     border: none;
     background: transparent;
     cursor: pointer;
+    margin: 0;
   }
   
-  .FeedTab.activeTab {
+  .NavTab.activeTab {
     background: rgba(121, 87, 87, 1);
     color: rgba(255, 255, 255, 1);
+    padding: 0 20px;
+  }
+
+  .NavTab.activeTab {
+    margin: 0 20;
+    border-color: black;
   }
