@@ -1,12 +1,27 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Chatbot from "./Component/Chatbot";
-import Homepage from "./Component/Homepage";
-import EditProfilePage from "./Component/EditProfilePage";
+// import Homepage from "./Component/Homepage";
+// import EditProfilePage from "./Component/EditProfilePage";
+// import SidebarAndNavbar from "./Component/SidebarAndNavbar";
+import ContextProvider from "./content/Context";
 
 function App() {
   return (
-    <Router>
+    <div className="App">
+      <ContextProvider>
+        <Chatbot />
+      </ContextProvider>
+
+      {/* <Homepage /> */}
+    </div>
+  );
+}
+
+export default App;
+
+{
+  /* <Router>
       <div className="App">
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -16,12 +31,5 @@ function App() {
           <Route path="/edit-profile" element={<EditProfilePage />} />
         </Routes>
       </div>
-    </Router>
-  );
+    </Router> */
 }
-
-export default App;
-// <div className="App">
-//   <Chatbot />
-//   <Homepage />
-// </div>
