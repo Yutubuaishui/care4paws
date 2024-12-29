@@ -20,9 +20,15 @@ const Chatbot = () => {
     resultData,
     setInput,
     input,
+    prevPrompt,
+    setRecentPrompt,
+    newChat,
   } = useContext(Context);
   const [extended, setExtended] = useState(false);
-
+  const loadPrompt = async (prompt) => {
+    setRecentPrompt(prompt);
+    await onSent(prompt);
+  };
   return (
     <div className="Chatbot">
       <div className="slidebar">
@@ -33,17 +39,24 @@ const Chatbot = () => {
             src={Menuicon}
             alt=""
           />
-          <div className="new-chat">
+          <div onClick={() => newChat()} className="new-chat">
             <img src={Addicon} alt="" />
             {extended ? <p>New Chat</p> : null}
           </div>
           {extended ? (
             <div className="recent">
               <p className="recent-title">Recent</p>
-              <div className="recent-entry">
-                <img src={Chaticon} alt="" />
-                <p>What does dog eat?</p>
-              </div>
+              {prevPrompt.map((item, index) => {
+                return (
+                  <div
+                    onClick={() => loadPrompt(item)}
+                    className="recent-entry"
+                  >
+                    <img src={Chaticon} alt="" />
+                    <p>{item.slice(0, 18)}...</p>
+                  </div>
+                );
+              })}
             </div>
           ) : null}
         </div>
@@ -64,12 +77,20 @@ const Chatbot = () => {
           ) : (
             <div className="result">
               <div className="result-title">
-                <img src={Avatar} alt="" />
+                <img src={Avatar} alt="" className="avatar" />
                 <p>{recentPrompt}</p>
               </div>
               <div className="result-data">
-                <img src={Logo} alt="" />
-                <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
+                <img src={Logo} alt="" className="logo" />
+                {loading ? (
+                  <div className="loader">
+                    <hr />
+                    <hr />
+                    <hr />
+                  </div>
+                ) : (
+                  <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
+                )}
               </div>
             </div>
           )}

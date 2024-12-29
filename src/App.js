@@ -5,6 +5,7 @@ import Chatbot from "./Component/Chatbot";
 // import EditProfilePage from "./Component/EditProfilePage";
 // import SidebarAndNavbar from "./Component/SidebarAndNavbar";
 import ContextProvider from "./content/Context";
+// import SideBarChatbot from "./Component/SideBarChatbot";
 
 function App() {
   return (
@@ -12,8 +13,6 @@ function App() {
       <ContextProvider>
         <Chatbot />
       </ContextProvider>
-
-      {/* <Homepage /> */}
     </div>
   );
 }
