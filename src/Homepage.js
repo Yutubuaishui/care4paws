@@ -3,7 +3,7 @@ import Landing from "./component/Landing/Landing";
 import About_Us from "./component/About_Us/About_Us";
 import WhatWeOffer from "./component/WhatWeOffer/WhatWeOffer";
 import Testimonials from "./component/Testimonials/Testimonials";
-// import JoinAsMember from "./components/JoinAsMember";
+import JoinUs from "./component/JoinUs/JoinUs";
 // import ContactUs from "./components/ContactUs";
 
 function Homepage() {
@@ -13,8 +13,8 @@ function Homepage() {
       <About_Us />
       <WhatWeOffer />
       <Testimonials />
-      {/* <JoinAsMember />
-      <ContactUs />   */}
+      <JoinUs />
+      {/* <ContactUs />   */}
     </div>
   );
 }

@@ -1,8 +1,6 @@
 import React from "react";
 import "./Landing.css";
 
-import LandingPhoto from '../../assets/LandingPhoto.png'; // Correct relative path
-
 function Landing() {
   return (
     <div className="landing">
