@@ -14,10 +14,10 @@
 }
 
 .what-we-offer-title {
-    font-size: 2rem; /* Smaller font size for the title */
+    font-size: 2rem; 
     color: #000000;
-    margin-bottom: 20px; /* Reduce margin-bottom */
-    text-align: center; /* Center the title */
+    margin-bottom: 20px; 
+    text-align: center; 
 }
 
 .services {

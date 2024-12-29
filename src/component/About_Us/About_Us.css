@@ -1,5 +1,5 @@
-body {
-    background-color: #FFF0D1;
+.about-us-page {
+    background-color: #FFF0D1; 
     margin: 0;
     font-family: 'Abhaya Libre';
 }
@@ -10,28 +10,28 @@ body {
     padding: 20px;
     min-height: 500px;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center; 
+    align-items: center; 
 }
 
 .about-us-content {
     display: flex;
-    align-items: center; /* Align items vertically centered */
-    justify-content: space-between; /* Space between left and right content */
-    text-align: left; /* Align text to the left */
+    align-items: center; 
+    justify-content: space-between; 
+    text-align: left; 
     width: 100%;
 }
 
 .about-us-left {
     display: flex;
-    flex-direction: column; /* Stack title and text vertically */
-    align-items: flex-start; /* Align items to the start (left) */
+    flex-direction: column; 
+    align-items: flex-start; 
 }
 
 .about-us-title {
     font-size: 2.5rem;
     color: #000000;
-    margin-bottom: 20px; /* Add space between title and text */
+    margin-bottom: 20px; 
 }
 
 .about-us-text {
