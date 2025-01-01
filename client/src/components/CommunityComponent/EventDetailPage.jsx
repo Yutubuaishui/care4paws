@@ -36,7 +36,7 @@ function EventDetailsModal({ isOpen, onClose, eventDetails }) {
               alt="Organizer"
               className="organizer-pic"
             />
-            <p className="organizer-name">{eventDetails.organizerName}</p>
+            <div className="organizer-name">{eventDetails.organizerName}</div>
           </div>
           <p>
             <strong>Date:</strong> {eventDetails.eventDate}

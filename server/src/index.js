@@ -20,9 +20,13 @@ app.use(
     cors({
         origin: "http://localhost:5173", // Allow requests from frontend
         methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+        allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true, // Allow cookies if needed
     })
 ); //enable CORS, handle request from diff origin (eg handle request from frontend)
+
+// Increase the body size limit for JSON payloads
+app.use(express.json({ limit: '10mb' }));
 
 //Routes
 app.use("/api/auth", authRoutes); //handling authentication, request to /api/auth send to authRoutes

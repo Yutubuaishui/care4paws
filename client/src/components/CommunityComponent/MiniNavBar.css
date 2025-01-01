@@ -43,3 +43,7 @@
     margin: 0 20;
     border-color: black;
   }
+
+  .NavTab.inactiveTab:hover{
+    background-color: rgba(121, 87, 87, 0.502);
+  }

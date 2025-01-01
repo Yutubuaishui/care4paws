@@ -14,7 +14,7 @@
   
   /* Modal container for the pop-up */
   .modal-container {
-    background: #fff;
+    background: #E4E0E1;
     width: 500px;
     max-width: 90%; /* Ensure responsiveness */
     border-radius: 10px;
@@ -64,6 +64,7 @@
   
   .organizer-info {
     display: flex;
+    flex-direction: row;
     align-items: center;
     margin-bottom: 10px;
   }
@@ -80,6 +81,8 @@
     font-size: 16px;
     font-weight: bold;
     color: #555;
+    height: 40px;
+    line-height: 40px;
   }
   
   .event-description {
@@ -94,7 +97,7 @@
     width: 90%;
     margin: 15px auto;
     padding: 10px 0;
-    background-color: #007bff;
+    background-color: #795757;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -104,7 +107,8 @@
   }
   
   .register-button:hover {
-    background-color: #0056b3;
+    background-color: #FFF0D1;
+    color: #795757;
   }
   
   /* Animation for modal */

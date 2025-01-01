@@ -44,7 +44,7 @@
   button {
     margin: 5px;
     padding: 10px;
-    background-color: #4caf50;
+    background-color: #795757;
     color: white;
     border: none;
     border-radius: 4px;
@@ -52,14 +52,8 @@
   }
   
   button:hover {
-    background-color: #45a049;
+    background-color: #FFF0D1;
+    color: #795757;
   }
-  
-  button[type="button"] {
-    background-color: #f44336;
-  }
-  
-  button[type="button"]:hover {
-    background-color: #e53935;
-  }
+
   

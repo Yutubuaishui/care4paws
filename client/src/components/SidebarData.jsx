@@ -74,7 +74,7 @@ export const SidebarData = (role) => {
         link: "/coordinator/home",
       },
       {
-        title: "Explore Community",
+        title: "Manage Your Community",
         icon: <img src={CommunityIcon} alt="Community Icon" className="icon" />,
         link: "/coordinator/home",
       },

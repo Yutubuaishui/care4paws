@@ -8,67 +8,73 @@ require("../models/communityPostModel");
 const communityPost =  mongoose.model("communityPost");
 
 
-router.get('/allPost',verifyToken,(req,res)=>{
-    communityPost.find()
-    .populate("postedBy","_id name")
-    //.populate("comments.postedBy","_id name")
-    .sort('-createdAt')
-    .then((posts)=>{
-        res.json({posts})
-    }).catch(err=>{
-        console.log(err)
-    })
-    
-})
+router.post('/create-post', verifyToken, async (req, res) => {
+    console.log("Request body:", req.body);
+    const { caption, photo } = req.body;
 
-// router.get('/getSubpost',verifyToken,(req,res)=>{
-
-//     // if postedBy in following
-//     Post.find({postedBy:{$in:req.user.following}})
-//     .populate("postedBy","_id name")
-//     .populate("comments.postedBy","_id name")
-//     .sort('-createdAt')
-//     .then(posts=>{
-//         res.json({posts})
-//     })
-//     .catch(err=>{
-//         console.log(err)
-//     })
-// })
-
-router.post('/createPost',verifyToken,(req,res)=>{
-    const {caption,photo} = req.body 
-    if(!caption || !photo){
-      return  res.status(422).json({error:"Plase add all the fields"})
+    if (!caption || !photo) {
+        return res.status(422).json({ error: "Please add all the fields" });
     }
-    req.user.password = undefined
-    const post = new communityPost({
-        caption,
-        photo,
-        postedBy: {
-            id: req.user._id,
-            username: req.user.username,
-            role: req.user.role,
-        },
-    })
-    post.save().then(result=>{
-        res.json({post:result})
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-})
 
-router.get('/myPost',verifyToken,(req,res)=>{
+    if (!photo.startsWith("data:image/")) {
+        return res.status(400).json({ error: "Invalid photo format" });
+    }
+
+    try {
+        const post = new communityPost({
+            caption,
+            photo,
+            timestamp: new Date().toLocaleTimeString(),
+            date: new Date().toLocaleDateString(),
+            likes: 0,
+            comments: 0,
+            postedBy: {
+                id: req.user._id,
+                username: req.user.username,
+                role: req.user.role,
+            },
+        });
+        post.save().then(result=>{
+            res.json({post:result})})
+    } catch (err) {
+        console.error("Error creating post:", err);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+
+router.get('/get-followed-posts',verifyToken,(req,res)=>{
     communityPost.find({postedBy:req.user._id})
     .populate("postedBy","_id name")
-    .then(mypost=>{
-        res.json({mypost})
+    .then(posts=>{
+        res.json({posts})
     })
     .catch(err=>{
         console.log(err)
     })
 })
+
+// router.get('/allPost',verifyToken,(req,res)=>{
+//     communityPost.find()
+//     .populate("postedBy","_id name")
+//     //.populate("comments.postedBy","_id name")
+//     .sort('-createdAt')
+//     .then((posts)=>{
+//         res.json({posts})
+//     }).catch(err=>{
+//         console.log(err)
+//     })
+    
+// })
+
+// router.get('/get-followed-posts', verifyToken, (req, res) => {
+//     communityPost
+//       .find({ /* Filter for followed posts */ })
+//       .populate("postedBy", "id username role") // Adjust as per your schema
+//       .then(posts => res.json(posts))
+//       .catch(err => console.log(err));
+//   });
+  
 
 // router.put('/like',verifyToken,(req,res)=>{
 //     communityPost.findByIdAndUpdate(req.body.postId,{

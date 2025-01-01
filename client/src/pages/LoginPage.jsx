@@ -17,8 +17,9 @@ function LoginPage() {
             const { token, role } = await loginUser(formData);
             localStorage.setItem('token', token); // Save token
             localStorage.setItem('role', role);   // Save role if needed
+            console.log(`${token}`);
 
-            alert('Login successful! Redirecting...');
+            //alert('Login successful! Redirecting...');
             // Redirect based on role
             if (role === 'admin') navigate('/admin');
             else if (role === 'coordinator') navigate('/coordinator');

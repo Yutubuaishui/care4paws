@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import EventCard from "../../../components/CommunityComponent/EventCard";
 import EventDetailsModal from "../../../components/CommunityComponent/EventDetailPage";
 import "./UserEvent.css";
+import { FaRegCalendarCheck } from "react-icons/fa";
 
 function Event() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,8 +44,12 @@ function Event() {
 
   return (
     <div>
-      <h2>Upcoming Events</h2>
-      <p>Check out the latest events happening around you!</p>
+      <div className="Intro">
+      <FaRegCalendarCheck size={40}
+        color="493628"/>
+      <h2>Mark your calendars !</h2>
+      </div>
+      <p>Get ready to paws and play! Check out the events near you !</p>
       <div className="EventCardContainer">
         {eventData.map((event, index) => (
           <EventCard

@@ -12,6 +12,7 @@ import Chatbot from "./components/Chatbot";
 //import Homepage from "./components/Homepage";
 import EditProfilePage from "./components/EditProfilePage";
 import UserCommunityPage from './pages/CommunityPage/UserCommunity/UserCommunityPage';
+import CoordinatorCommunityPage from './pages/CommunityPage/CoordinatorCommunity/CoordinatorCommunityPage';
 
 function App() {
     return (
@@ -38,7 +39,7 @@ function App() {
                         <ProtectedRoute allowedRoles={['coordinator']}>
                             <Routes>
                                 <Route path="" element={<CoordinatorDashboard />} />
-                                {/* Add Coordinator-specific routes */}
+                                <Route path="/community" element={<CoordinatorCommunityPage />} />
                             </Routes>
                         </ProtectedRoute>
                     }

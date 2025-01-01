@@ -13,6 +13,8 @@
   
   .event-card:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1%);
+    overflow: visible;
   }
   
   .event-card-header {
@@ -20,6 +22,7 @@
     justify-content: space-between;
     padding: 10px 15px;
     align-items: center;
+    background-color: #E4E0E1;
   }
   
   .organizer-info {
@@ -37,11 +40,11 @@
   
   .organizer-name {
     font-weight: bold;
-    color: #333;
+    color: #493628;
   }
   
   .event-type {
-    background-color: #007bff;
+    background-color: #795757;
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
@@ -82,7 +85,7 @@
   .event-fee {
     font-size: 14px;
     font-weight: bold;
-    margin-top: 10px;
+    margin: 5px 0;
     color: #333;
   }
   
@@ -91,7 +94,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f8f8f8;
+    background-color: #9a826f;
   }
   
   .event-status {
@@ -106,26 +109,37 @@
   }
   
   .event-tag {
-    background-color: #e0e0e0;
+    background-color: #D6C0B3;
     color: #555;
     padding: 5px 10px;
     border-radius: 20px;
     font-size: 12px;
+    font-weight: 600;
+    margin: 0 5px;
   }
   
   .event-share {
     cursor: pointer;
-    color: #007bff;
+    color: #493628;
     display: flex;
     align-items: center;
   }
   
   .event-share:hover {
-    color: #0056b3;
+    color: #795757;
   }
   
   .event-share svg {
     margin-right: 5px;
+  }
+
+  .check-details{
+    background-color: #795757;
+  }
+
+  .check-details:hover{
+    background-color: #FFF0D1;
+    color: #795757;
   }
   
   /* Responsive Design */

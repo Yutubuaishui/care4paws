@@ -45,7 +45,7 @@ function EventCard({
           <div className="event-fee">
             <strong>Fee: </strong>{eventFee}
           </div>
-          <button onClick={(e) => {
+          <button className="check-details" onClick={(e) => {
           e.stopPropagation(); // Prevent triggering card click
           onClick();
         }}>See Event Details</button>

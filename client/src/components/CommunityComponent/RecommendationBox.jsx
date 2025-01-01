@@ -1,6 +1,7 @@
 import React from 'react'
 import RecommendationCard from './RecommendationCard'
 import "./RecommendationBox.css"
+import { IoIosPeople } from "react-icons/io";
 
 function RecommendationBox() {
     const handleAddClick = () =>{
