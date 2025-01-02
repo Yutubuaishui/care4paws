@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode"; // Correct way to import jwtDecode
-
 import { createEducationPost } from "../api"; // Import the createPost function
+import chatbotpic from "../Assets/Chatbot.jpg";
+import Chatbot from "../components/Chatbot";
+import "../pages/CreatePostPage.css";
 
 function CreatePostPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
+  const [isChatbotVisible, setIsChatbotVisible] = useState(false); // Track the chatbot visibility
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -46,25 +49,46 @@ function CreatePostPage() {
   };
 
   return (
-    <div>
-      <h1>Create Post</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
+    <div className={`createPost ${isChatbotVisible ? "with-chatbot" : ""}`}>
+      <div className="container">
+        <h1 className="header">Create Post</h1>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <form onSubmit={handleSubmit} className="form">
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            className="input"
+          />
+          <textarea
+            placeholder="Content"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+            className="textarea"
+          ></textarea>
+          <button type="submit" className="button">
+            Post
+          </button>
+        </form>
+      </div>
+
+      <div
+        className="chatbot-toggle-button"
+        onClick={() => setIsChatbotVisible(!isChatbotVisible)}
+      >
+        <img
+          src={chatbotpic} // Use the same image
+          alt="Toggle Chatbot"
+          className={
+            isChatbotVisible ? "chatbot-icon-active" : "chatbot-icon-inactive"
+          } // Add a class to style it differently
         />
-        <textarea
-          placeholder="Content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        ></textarea>
-        <button type="submit">Post</button>
-      </form>
+      </div>
+
+      {isChatbotVisible && <Chatbot />}
     </div>
   );
 }
