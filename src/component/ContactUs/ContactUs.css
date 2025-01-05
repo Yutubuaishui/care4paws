@@ -1,0 +1,54 @@
+body {
+  overflow-x: hidden; 
+}
+
+.contactus-page {
+  background-color: #FFF0D1; 
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: flex-start; 
+}
+
+.contactus-section {
+  flex: 1; 
+  padding: 10px;
+}
+
+.left-most {
+  text-align: center;
+}
+
+.left-most .logo {
+  width: 200px; 
+  margin-top: -50px;
+}
+
+.middle-left ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.middle-left ul li {
+  margin-bottom: 5px;
+}
+
+.middle-right p {
+  margin: 5px 0;
+}
+
+.right-most .social-icons {
+  display: flex;
+  gap: 10px; 
+}
+
+.right-most .social-icons svg {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.right-most .social-icons svg:hover {
+  color: #007BFF; 
+}

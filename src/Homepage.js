@@ -4,7 +4,7 @@ import About_Us from "./component/About_Us/About_Us";
 import WhatWeOffer from "./component/WhatWeOffer/WhatWeOffer";
 import Testimonials from "./component/Testimonials/Testimonials";
 import JoinUs from "./component/JoinUs/JoinUs";
-// import ContactUs from "./components/ContactUs";
+import ContactUs from "./component/ContactUs/ContactUs";
 
 function Homepage() {
   return (
@@ -14,7 +14,7 @@ function Homepage() {
       <WhatWeOffer />
       <Testimonials />
       <JoinUs />
-      {/* <ContactUs />   */}
+      <ContactUs />  
     </div>
   );
 }

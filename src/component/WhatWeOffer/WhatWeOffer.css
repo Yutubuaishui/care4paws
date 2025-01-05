@@ -1,5 +1,5 @@
 .what-we-offer-page {
-    background-color: #e2e2e2; /* Change the background color of the What We Offer page */
+    background-color: #e2e2e2; 
     padding: 20px;
 }
 
@@ -28,28 +28,28 @@
 }
 
 .service {
-    flex: 0 0 48%; /* Two services per row */
-    margin-bottom: 20px; /* Reduce margin-bottom */
+    flex: 0 0 48%; 
+    margin-bottom: 20px; 
     text-align: left;
 }
 
 .service-image {
     width: 100%;
-    max-width: 250px; /* Smaller size for the images */
-    border-radius: 20px; /* Rounded corners */
+    max-width: 250px; 
+    border-radius: 20px; 
     margin-bottom: 10px; 
     margin-left: 170px;
 }
 
 .service-title {
-    font-size: 1.5rem; /* Smaller font size for the service titles */
+    font-size: 1.5rem; 
     color: #664343;
     margin-bottom: 10px;
     margin-left: 170px;
 }
 
 .service-description {
-    font-size: 1.2rem; /* Smaller font size for the service descriptions */
+    font-size: 1.2rem; 
     color: #333;
     line-height: 1.0; 
     margin-left: 170px;
