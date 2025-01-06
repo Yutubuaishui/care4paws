@@ -29,11 +29,13 @@
 }
 
 @media (max-width: 1100px) {
+  .TrendingSection{
+    display: contents;
+  }
   .ActiveCampaigns{
     display: none;
   }
   .TrendingPosts{
     margin: 20px auto;
-    width: 100%;
   }
 }

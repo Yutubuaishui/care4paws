@@ -39,69 +39,32 @@ const ExploreCommunity = () => {
   );
 
   return (
-    <div className="ExploreCommunity">
-      {/* <PetCareQuiz/> */}
-      {/* Left Section: Game Area */}
-      {/* <div className="GameArea">
-        <h2>Pet Adventure Game</h2>
-        <div className="Leaderboard">
-          {leaderboard.map((user) => (
-            <div className="LeaderboardItem" key={user.id}>
-              <img src={user.avatar} alt={`${user.username}'s avatar`} />
-              <span className="username">{user.username}</span>
-              <span className="badge">{user.badge}</span>
-            </div>
-          ))}
-        </div>
-        <div className="GameStats">
-          <p>Complete challenges to climb the leaderboard!</p>
-        </div>
-      </div> */}
+    <TrendingSection className="trend"/>  
+    // <div className="ExploreCommunity">
+    //   Right Section: Chatbot and Campaign
+    //   <div className="ChatbotAndCampaign">
+    //     <div className="Chatbot">
+    //       <img
+    //         src="chatbot-avatar.png"
+    //         alt="Chatbot"
+    //         className="ChatbotAvatar"
+    //         onClick={toggleChatbot}
+    //       />
+    //       {isChatOpen && <ChatbotWindow />}
+    //     </div>
 
-      {/* Middle Section: Trending Feed */}
-      {/* <div className="TrendingContent">
-        <h2>Trending Now</h2>
-        <div className="TrendingFeed">
-          {trendingPosts.map((post) => (
-            <div className="PostItem" key={post.id}>
-              <img src={post.image} alt="Trending post" />
-              <p>{post.caption}</p>
-            </div>
-          ))}
-        </div>
-      </div> */}
-
-      {/* Right Section: Chatbot and Campaign */}
-      {/* <div className="ChatbotAndCampaign">
-        <div className="Chatbot">
-          <img
-            src="chatbot-avatar.png"
-            alt="Chatbot"
-            className="ChatbotAvatar"
-            onClick={toggleChatbot}
-          />
-          {isChatOpen && <ChatbotWindow />}
-        </div>
-
-        <div className="Campaigns">
-          <h3>Active Campaigns</h3>
-          {campaigns.map((camp) => (
-            <div className="CampaignItem" key={camp.id}>
-              <img src={camp.image} alt="Campaign" />
-              <p>{camp.description}</p>
-              <button>Join</button>
-            </div>
-          ))}
-        </div>
-      </div> */}
-      <div className="ExploreContent">
-        <div className="GameSection">
-          <GameInterface/>
-        </div>
-        <TrendingSection />
-      </div>
-      
-    </div>
+    //     <div className="Campaigns">
+    //       <h3>Active Campaigns</h3>
+    //       {campaigns.map((camp) => (
+    //         <div className="CampaignItem" key={camp.id}>
+    //           <img src={camp.image} alt="Campaign" />
+    //           <p>{camp.description}</p>
+    //           <button>Join</button>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   </div>    
+    // </div>
   );
 };
 

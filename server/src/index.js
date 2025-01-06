@@ -25,6 +25,17 @@ app.use(
     })
 ); //enable CORS, handle request from diff origin (eg handle request from frontend)
 
+// app.use(
+//     cors({
+//       origin: "*", // Allow all origins
+//     })
+//   );
+
+// Explicitly handle preflight requests
+app.options("*", (req, res) => {
+    res.sendStatus(204); // Respond with no content
+  });
+
 // Increase the body size limit for JSON payloads
 app.use(express.json({ limit: '10mb' }));
 

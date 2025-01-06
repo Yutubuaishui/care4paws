@@ -39,8 +39,16 @@
 
 .postImage {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.image-box{
+  display: flex;
+  justify-content: center;
 }
 
 .postContent {

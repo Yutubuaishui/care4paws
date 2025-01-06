@@ -4,7 +4,7 @@ const User = require("../models/userModel");
 
 const register = async (req, res) => {
     try {
-        const { email, password, role, username, firstName, lastName, phoneNumber } = req.body;
+        const { email, password, role, username, avaterSrc, firstName, lastName, phoneNumber } = req.body;
 
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         const passwordStrengthRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
@@ -15,6 +15,10 @@ const register = async (req, res) => {
 
         if (!passwordStrengthRegex.test(password)) {
             return res.status(400).json({ message: 'Password must be at least 8 characters long, with at least one letter and one number.' });
+        }
+
+        if (!avatarSrc) {
+            return res.status(400).json({ message: "Profile picture (avatarSrc) is required." });
         }
 
         const existUser = await User.findOne({ email });
@@ -30,7 +34,8 @@ const register = async (req, res) => {
             username,
             firstName,
             lastName,
-            phoneNumber
+            phoneNumber,
+            avaterSrc
         });
 
         await newUser.save();
@@ -44,7 +49,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        console.log("Login attempt:", req.body); // Debug log
+        console.log("Login attempt:", req.body); //log the credentials passed
 
         const { email, password } = req.body;
         const user = await User.findOne({ email });
@@ -66,11 +71,9 @@ const login = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
-
-        console.log("Login successful for user:", email); // Debug log
         const userdata = await User.findById(user._id).select("-password");
-        console.log("Authenticated user data:", userdata); // Debug log
-        res.status(200).json({ token, role: user.role });
+        console.log("Authenticated user data:", userdata);
+        res.status(200).json({ token, role: user.role, userId: user._id });
     } catch (err) {
         console.error("Login error:", err.message); // Debug log
         res.status(500).json({ message: "Something went wrong", error: err.message });

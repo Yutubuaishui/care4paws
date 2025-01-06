@@ -7,6 +7,7 @@ function RegisterPage() {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         username: '',
+        avaterSrc: '',
         email: '',
         password: '',
         role: '',
@@ -48,6 +49,25 @@ function RegisterPage() {
         setError('');
         console.log('Form is valid');
         return true;
+    };
+
+    const handleProPicUpload = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = () => {
+            setFormData((prevData) => ({
+                ...prevData,
+                avaterSrc: reader.result, // Update `avaterSrc` with Base64 string
+            }));
+            console.log("Profile picture uploaded:", reader.result);
+        };
+    
+        reader.onerror = (error) => {
+            console.error("Error reading image file:", error);
+        };
+    
+        reader.readAsDataURL(file); // Converts to Base64
     };
 
     // Handle form submission
@@ -95,6 +115,20 @@ function RegisterPage() {
                     <option value="user">User</option>
                 </select>
                 <input
+                    name="username"
+                    placeholder="Username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    name="avaterSrc"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleProPicUpload} 
+                    required
+                />
+                <input
                     name="email"
                     type="email"
                     placeholder="Email"
@@ -121,13 +155,6 @@ function RegisterPage() {
                     name="lastName"
                     placeholder="Last Name"
                     value={formData.lastName}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    name="username"
-                    placeholder="Username"
-                    value={formData.username}
                     onChange={handleChange}
                     required
                 />

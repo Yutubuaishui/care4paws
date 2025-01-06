@@ -14,11 +14,10 @@ function LoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { token, role } = await loginUser(formData);
+            const { token, role, userId } = await loginUser(formData);
             localStorage.setItem('token', token); // Save token
-            localStorage.setItem('role', role);   // Save role if needed
-            console.log(`${token}`);
-
+            localStorage.setItem('role', role);   // Save role 
+            localStorage.setItem('userId',userId);
             //alert('Login successful! Redirecting...');
             // Redirect based on role
             if (role === 'admin') navigate('/admin');
