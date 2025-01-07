@@ -1,10 +1,12 @@
 import './App.css';
-import Homepage from './Homepage';
+import Landing from './container/Landing/Landing';
+
 function App() {
   return (
     <div>
-      <Homepage />
+      <Landing />
     </div>
   );
 }
+
 export default App;
