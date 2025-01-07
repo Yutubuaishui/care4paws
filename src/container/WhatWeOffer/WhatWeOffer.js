@@ -1,9 +1,9 @@
 import React from 'react';
 import './WhatWeOffer.css';
-import Service1Image from '../../../assets/LostAndFound.png';
-import Service2Image from '../../../assets/PetCommunity.png';
-import Service3Image from '../../../assets/Adoption.png';
-import Service4Image from '../../../assets/EduAndDonation.png';
+import Service1Image from '../../assets/LostAndFound.png';
+import Service2Image from '../../assets/PetCommunity.png';
+import Service3Image from '../../assets/Adoption.png';
+import Service4Image from '../../assets/EduAndDonation.png';
 
 const WhatWeOffer = () => {
     return (

@@ -1,12 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Landing.css";
-import About_Us from "./About_Us/About_Us";
-import WhatWeOffer from "./WhatWeOffer/WhatWeOffer";
-import Testimonials from "./Testimonials/Testimonials";
-import JoinUs from "./JoinUs/JoinUs";
-import ContactUs from "./ContactUs/ContactUs";
+import About_Us from "../About_Us/About_Us";
+import WhatWeOffer from "../WhatWeOffer/WhatWeOffer";
+import Testimonials from "../Testimonials/Testimonials";
+import JoinUs from "../JoinUs/JoinUs";
+import ContactUs from "../ContactUs/ContactUs";
 
 const Landing = () => {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate("/homepage");
+  };
+
   return (
     <div className="landing-page">
       <header className="landing-header">
@@ -25,7 +32,7 @@ const Landing = () => {
               <a href="#contact">Contact Us</a>
             </li>
           </ul>
-          <button className="login-button">Login</button>
+          <button className="login-button" onClick={handleLoginClick}>Login</button>
         </nav>
       </header>
       <main>

@@ -1,0 +1,198 @@
+* {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  
+  .Homepage {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .homebottom {
+    width: 100%; /* Make it span the full width of the container */
+    background: #e2e2e2;
+    height: calc(100vh - 60px); /* Full viewport height */
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+  }
+  
+  /* rectangle */
+  .wrappingModule {
+    display: flex;
+    height: calc(100vh - 100px); /* Adjust to account for navbar height */
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+    margin: 10px;
+    box-sizing: border-box;
+    /* background-color: aqua; */
+    border-radius: 10px;
+    width: 100%;
+  }
+  
+  .wrappingleft {
+    flex: 2;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: visible;
+  }
+  
+  .bigText {
+    /* font-size: 18px; */
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .wlt {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .bigTextImage {
+    width: 100%; /* Adjust as needed for responsiveness */
+    max-width: 300px; /* Optional: Limit the maximum width */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    margin-top: 10px; /* Add spacing between text and image */
+  }
+  
+  .wrappingleft .wlm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .text {
+    font-size: clamp(12px, 1.5vw, 16px); /* Adjust for smaller paragraphs */
+    /* font-size: 18px; */
+    text-align: center;
+  }
+  
+  .wrappingleft .wlm .galleryImages {
+    display: flex;
+    gap: 10px;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  
+  .wrappingleft .wlm img {
+    width: 80px;
+    height: 100px;
+    border-radius: 5px;
+  }
+  
+  .wrappingleft .wlb {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .wrappingleft .wlb button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #795757;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .wrappingright {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* background-color: aqua; */
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .donation,
+  .lostAndFound {
+    flex: 1;
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden;
+  }
+  
+  /* .donation img {
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 0px;
+  } */
+  
+  .donation img {
+    width: 100%; /* Make it responsive to its container */
+    max-width: 300px; /* Set a maximum width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure it fits well */
+    border-radius: 10px;
+    margin-top: 0px;
+  }
+  
+  .lafimages {
+    display: flex;
+    gap: 10px;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .lafimages img {
+    border-radius: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #795757;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .wrappingModule {
+      flex-direction: column; /* Stack rectangles vertically */
+      height: auto; /* Allow height to adjust dynamically */
+      gap: 10px;
+    }
+  
+    .wrappingleft,
+    .wrappingright,
+    .donation,
+    .lostAndFound {
+      width: 100%; /* Make rectangles span full width */
+      flex: none; /* Disable flex scaling */
+      margin-bottom: 10px; /* Add spacing between stacked elements */
+    }
+  
+    .wrappingleft {
+      flex: 1;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .wrappingModule {
+      padding: 10px; /* Reduce padding for very small screens */
+      gap: 10px; /* Reduce gap between elements */
+    }
+  
+    .wrappingleft,
+    .wrappingright {
+      padding: 15px; /* Adjust padding for smaller screens */
+    }
+  }

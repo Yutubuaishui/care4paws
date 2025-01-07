@@ -4,10 +4,10 @@ import './Testimonials.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import YangYang from '../../../assets/YangYang.jpg';
-import GDragon from '../../../assets/GDragon.png';
-import Ahyeon from '../../../assets/Ahyeon.jpg';
-import Rosie from '../../../assets/Rosie.jpg';
+import YangYang from '../../assets/YangYang.jpg';
+import GDragon from '../../assets/GDragon.png';
+import Ahyeon from '../../assets/Ahyeon.jpg';
+import Rosie from '../../assets/Rosie.jpg';
 
 const testimonials = [
   {
