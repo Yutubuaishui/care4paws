@@ -15,7 +15,7 @@ export const SidebarData = [
   {
     title: "Discover Cute Pet",
     icon: <AdoptIcon />,
-    link: "/home",
+    link: "/adopt-pet",
   },
   {
     title: "Lost and Found Corner",

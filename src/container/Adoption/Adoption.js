@@ -74,10 +74,10 @@ const Adoption = () => {
               </div>
               <div className="swipe-buttons">
                 <button onClick={() => handleSwipe("left")}>
-                  <img src={CrossIcon} alt="Cross" className="icon" />
+                  <img src={CrossIcon} alt="Cross" className="cross-icon" />
                 </button>
                 <button onClick={() => handleSwipe("right")}>
-                  <img src={LoveIcon} alt="Love" className="icon" />
+                  <img src={LoveIcon} alt="Love" className="love-icon" />
                 </button>
               </div>
             </div>
@@ -92,6 +92,7 @@ const Adoption = () => {
                     <p><strong>Age:</strong> {animal.age}</p>
                     <p><strong>Gender:</strong> {animal.gender}</p>
                     <p><strong>Breed:</strong> {animal.breed}</p>
+                    {/* <button className="view-button">View</button> */}
                   </div>
                 </div>
               ))}
