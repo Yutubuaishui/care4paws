@@ -1,0 +1,134 @@
+.adoption-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; /* Prevent vertical scrolling */
+  }
+  
+  .adoption-content {
+    display: flex;
+    flex: 1;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden; /* Prevent vertical scrolling */
+  }
+  
+  .tab-navigation {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .tab-navigation button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  
+  .tab-navigation button.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .swipe-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden; /* Prevent vertical scrolling */
+  }
+  
+  .photo-gallery {
+    display: flex;
+    align-items: center;
+  }
+  
+  .left-photo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .right-photos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .animal-photo {
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .animal-photo.large {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .animal-photo.small {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .swipe-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .swipe-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0 20px;
+  }
+  
+  .icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .all-pets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .pet-box {
+    display: flex;
+    width: 400px; /* Increase the width of each box */
+    height: 150px; /* Increase the height of each box */
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .pet-photo {
+    width: 150px; /* Increase the width of the pet photo */
+    height: 150px; /* Increase the height of the pet photo */
+    object-fit: cover;
+  }
+  
+  .pet-details {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .pet-details p {
+    margin: 5px 0;
+  }
