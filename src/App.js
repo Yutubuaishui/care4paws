@@ -1,7 +1,12 @@
 import './App.css';
+import Landing from './container/Landing/Landing';
+
 function App() {
   return (
-    <div className="App">Hello</div>
+    <div>
+      <Landing />
+    </div>
   );
 }
+
 export default App;
