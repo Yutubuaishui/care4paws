@@ -1,0 +1,19 @@
+.map-location-picker {
+    margin-top: 20px;
+  }
+  
+  .map-container {
+    height: 300px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .location-details {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .location-details p {
+    font-weight: bold;
+  }
+  
