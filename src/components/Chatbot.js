@@ -95,20 +95,19 @@ const Chatbot = () => {
             </div>
           )}
         </div>
-        <div className="containerBottom">
-          <div className="chatbottom">
-            <div className="search-box">
-              <input
-                onChange={(e) => setInput(e.target.value)}
-                value={input}
-                type="text"
-                placeholder="Enter a prompt here"
-              />
-              <div>
-                <img src={AddPhotoIcon} alt="" />
-                <img src={MicIcon} alt="" />
-                <img onClick={() => onSent()} src={SendIcon} alt="" />
-              </div>
+
+        <div className="chatbottom">
+          <div className="search-box">
+            <input
+              onChange={(e) => setInput(e.target.value)}
+              value={input}
+              type="text"
+              placeholder="Enter a prompt here"
+            />
+            <div>
+              <img src={AddPhotoIcon} alt="" />
+              <img src={MicIcon} alt="" />
+              <img onClick={() => onSent()} src={SendIcon} alt="" />
             </div>
           </div>
         </div>
