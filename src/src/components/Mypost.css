@@ -1,0 +1,65 @@
+.my-posts-page {
+    font-family: Arial, sans-serif;
+    color: #5A3D3A;
+  }
+  
+  .my-posts-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .posts-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .post-card {
+    background-color: #FFFFFF;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+  }
+  
+  .post-card h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+  }
+  
+  .post-card p {
+    margin: 5px 0;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
+
+  .tab-bar {
+    color: #5A3D3A;
+  }
+  
+  .tab-bar button {
+    background-color: #5A3D3A;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .tab-bar button:hover {
+    background-color: #ddd;
+  }
+  
+  .tab-bar button.active {
+    background-color: #7B6D66;
+    font-weight: bold;
+  }
+  
+  

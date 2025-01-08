@@ -1,0 +1,117 @@
+/* General page styling */
+.history-page {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Container for the history section */
+  .history-container {
+    width: 90%;
+    max-width: 800px;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Page title */
+  .history-container h1 {
+    color: #333333;
+    margin-bottom: 20px;
+  }
+  
+  /* Error and notification messages */
+  .error-message {
+    color: #d9534f;
+    background: #f2dede;
+    border: 1px solid #ebccd1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .notification-message {
+    color: #3c763d;
+    background: #dff0d8;
+    border: 1px solid #d6e9c6;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* List of reports */
+  .reports-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  /* Individual report card */
+  .report-card {
+    background: #fdfdfd;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .report-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Pet report title */
+  .report-card h3 {
+    color: #333333;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  /* Details styling */
+  .report-card p {
+    color: #555555;
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  
+  .report-card p strong {
+    color: #333333;
+  }
+  
+  /* Mark as Found button */
+  .found-button {
+    background: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .found-button:hover {
+    background: #4cae4c;
+  }
+  
+  .found-button:active {
+    background: #449d44;
+  }
+  
+  /* No reports message */
+  .history-container p {
+    color: #777777;
+    font-size: 16px;
+  }
+  
