@@ -1,8 +1,9 @@
-import {React, useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './PostCard.css';
 import { FaRegCommentDots } from "react-icons/fa6";
 import { LuDog } from "react-icons/lu";
-import { likePost, unlikePost } from '../../api';
+import { likePost, unlikePost, fetchCommentCount, deletePost } from '../../api';
+import CommentModal from './CommentModal';
 
 export const PostCard = ({ 
   _id,
@@ -14,20 +15,49 @@ export const PostCard = ({
   timestamp, 
   date,
   likes,
-  comments,
   userLikes,
-  openModal,
+  onDelete,
 }) => {
   const [likeCount, setLikeCount] = useState(likes);
   const [isLiked, setIsLiked] = useState(false);
+  const [commentCount, setCommentCount] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // Check if the user has liked this post
-    const currentUserId = localStorage.getItem("userId"); // Assuming the user ID is stored in localStorage
+    const currentUserId = localStorage.getItem("userId");
     setIsLiked(userLikes.includes(currentUserId));
   }, [userLikes]);
 
-  const handleLikeClick = async () => {
+  useEffect(() => {
+    const getCommentCount = async () => {
+      try {
+        const count = await fetchCommentCount(_id);
+        setCommentCount(count);
+      } catch (error) {
+        console.error("Error fetching comment count:", error);
+      }
+    };
+
+    getCommentCount();
+  }, [_id]);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const updateCommentCount = async () => {
+    try {
+      const count = await fetchCommentCount(_id);
+      setCommentCount(count);
+    } catch (error) {
+      console.error("Error fetching comment count:", error);
+    }
+  };
+const handleLikeClick = async () => {
     try {
       if (isLiked) {
         // User is unliking the post
@@ -47,10 +77,19 @@ export const PostCard = ({
       setIsLiked(!isLiked);
       setLikeCount(prevCount => (isLiked ? prevCount + 1 : prevCount - 1));
     }
+  }; 
+
+  const handleDelete = async () => {
+    try {
+      await deletePost(_id);
+      onDelete(_id);
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
   };
 
   return (
-    <div className="postCard">
+    <div className="post-card">
       <div className="postHeader">
         <img 
           src={avatarSrc} 
@@ -87,15 +126,27 @@ export const PostCard = ({
               onClick={handleLikeClick} // Add click handler
             />
             <span>{likeCount}</span>
-            <FaRegCommentDots
-              className="interactionButton"
-              aria-label={`${comments} comments`}
-              size={30} // Adjust the size of the icon
-              onClick={() => openModal(_id)} // Add click handler
-            />
-            <span>{comments}</span>
-        </div>
+      <div className="interaction-buttons">
+        <FaRegCommentDots
+          className="interactionButton"
+          aria-label={`${commentCount} comments`}
+          size={30}
+          onClick={openModal}
+        />
+        <span>{commentCount}</span>
+        <button onClick={handleDelete}>Delete</button>
       </div>
+      {isModalOpen && (
+        <CommentModal
+        post={{ _id, avatarSrc, username, caption: description, photo: imageSrc }}
+          updateCommentCount={updateCommentCount}
+          onClose={closeModal}
+        />
+      )}
     </div>
+  </div>
+</div>
   );
 };
+
+export default PostCard;

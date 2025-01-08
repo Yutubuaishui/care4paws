@@ -37,8 +37,16 @@ const userSchema = new mongoose.Schema(
         },
         avatarSrc:{
             type: String,
-            required: true,
-        }
+            default: "https://res.cloudinary.com/dkkgmzpqd/image/upload/v1633663664/avatars/avatar-1_yljv8v.png",
+        },
+        description:{
+            type: String,
+            //required: true,
+        },
+        following: [{ 
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'User' 
+        }]
     },
     {
         timestamps: true,

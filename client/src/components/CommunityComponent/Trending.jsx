@@ -19,7 +19,7 @@ const TrendingSection = () => {
         </div>
         <div className="TrendingPosts">
           <h3>Trending Posts</h3>
-          <PostCard
+          {/* <PostCard
                     key="1"
                     avatarSrc= {Logo} // Provide a valid image path
                     username="user123"
@@ -42,7 +42,7 @@ const TrendingSection = () => {
                     date="2024-12-27"
                     likes="123"
                     comments="45"
-                  />
+                  /> */}
         </div>
       </div>
     );

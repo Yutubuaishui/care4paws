@@ -1,8 +1,8 @@
-.recommendation-card {
+/* .recommendation-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap; /* Allow wrapping for small screens */
+    flex-wrap: wrap; 
     padding: 10px 15px;
     border: 1px solid #ddd;
     background-color: #fff;
@@ -30,20 +30,20 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-width: 150px; /* Ensure a reasonable width for details */
+    min-width: 150px; 
   }
   
   .name {
     font-size: 16px;
     font-weight: bold;
     color: #333;
-    word-wrap: break-word; /* Prevent long text overflow */
+    word-wrap: break-word; 
   }
   
   .description {
     font-size: 14px;
     color: #777;
-    word-wrap: break-word; /* Prevent long text overflow */
+    word-wrap: break-word; 
   }
   
   .add-icon-container {
@@ -51,7 +51,7 @@
     cursor: pointer;
     color: #007bff;
     transition: transform 0.2s ease;
-    margin-left: 10px; /* Add spacing from details */
+    margin-left: 10px; 
   }
   
   .add-icon-container:hover {
@@ -63,39 +63,38 @@
     font-size: 20px;
   }
   
-  /* Responsive Design */
   @media (max-width: 768px) {
     .recommendation-card {
-      flex-direction: column; /* Stack content vertically on smaller screens */
+      flex-direction: column; 
       align-items: flex-start;
       padding: 10px;
     }
   
     .avatar-container {
       margin-right: 0;
-      margin-bottom: 10px; /* Add spacing between rows */
+      margin-bottom: 10px; 
     }
   
     .details-container {
-      margin-bottom: 10px; /* Add spacing between details and add-icon */
+      margin-bottom: 10px; 
     }
   
     .add-icon-container {
-      align-self: flex-start; /* Align the add icon to the left */
+      align-self: flex-start; 
     }
   }
   
   @media (max-width: 480px) {
     .name {
-      font-size: 14px; /* Adjust font size for smaller screens */
+      font-size: 14px; 
     }
   
     .description {
-      font-size: 12px; /* Adjust font size for smaller screens */
+      font-size: 12px; 
     }
   
     .add-icon {
-      font-size: 18px; /* Adjust icon size for smaller screens */
+      font-size: 18px; 
     }
-  }
+  } */
   

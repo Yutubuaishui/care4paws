@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SidebarData } from "../../../components/SidebarData";
 import { Link } from "react-router-dom";
 import "../../Dashboard.css";
@@ -17,6 +17,7 @@ import ExploreCommunity from "./UserExploreCommunity";
 import Event from "./UserEvent";
 import "./UserCommunityPage.css"
 import RecommendationBox from "../../../components/CommunityComponent/RecommendationBox";
+import { fetchCoordinators, followUser, unfollowUser, fetchFollowedIds } from '../../../api';
 
 
 function UserCommunityPage() {
@@ -43,6 +44,65 @@ const renderTabContent = () => {
       return <div>Tab not found</div>;
   }
 };
+
+//handle recommendation box
+const [recommendations, setRecommendations] = useState([]);
+const [followedIds, setFollowedIds] = useState([]);
+
+useEffect(() => {
+  const getCoordinators = async () => {
+    try {
+      const coordinators = await fetchCoordinators();
+      setRecommendations(coordinators);
+    } catch (error) {
+      console.error("Error fetching coordinators:", error);
+    }
+  }; getCoordinators();
+}, []);
+
+useEffect(() => {
+  const getFollowedIds = async () => {
+    try {
+      const userId = localStorage.getItem('userId');
+      const followedIds = await fetchFollowedIds(userId);
+        console.log('Fetched followed IDs:', followedIds);
+        setFollowedIds(followedIds);
+        setRecommendations(prevRecommendations => 
+          prevRecommendations.filter(recommendation => !followedIds.includes(recommendation._id))
+        );
+      
+    } catch (error) {
+      console.error("Error fetching followed users:", error);
+    }
+  };
+
+  getFollowedIds();
+}, []);
+
+  const handleAdd = async (id) => {
+    try {
+      const userId = localStorage.getItem('userId'); // Get the current user's ID
+      await followUser(userId, id, followedIds);
+      console.log(`Followed user with id: ${id}`);
+      setFollowedIds([...followedIds, id]); // Update the followedIds state
+      setRecommendations(recommendations.filter(recommendation => recommendation._id !== id));
+
+    } catch (error) {
+      console.error("Error following user:", error);
+    }
+  };
+
+  const handleRemove = async (id) => {
+    try {
+      const userId = localStorage.getItem('userId'); // Get the current user's ID
+      await unfollowUser(userId, id);
+      console.log(`Unfollowed user with id: ${id}`);
+      setFollowedIds(followedIds.filter(followedId => followedId !== id)); // Update the followedIds state
+    } catch (error) {
+      console.error("Error unfollowing user:", error);
+    }
+  };
+  
 
 return (
     <div className="CoordinatorDashboard">
@@ -120,8 +180,12 @@ return (
               {activeTab === "myFeed" && ( // Conditionally render SideContainer
               <div className="SideContainer">
                 <div>
-                  <RecommendationBox />
-                  <RecommendationBox />
+                <RecommendationBox
+                  recommendations={recommendations}
+                  onAdd={handleAdd}
+                  onRemove={handleRemove}
+                  followedIds={followedIds}
+                />                
                 </div>
               </div>
             )}

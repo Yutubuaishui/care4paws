@@ -1,0 +1,28 @@
+.big-div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.participants-box{
+    align-self: flex-start;
+    color: white;
+    background-color: blue;
+    border-radius: 8px;
+    padding: 4px 6px;
+}
+
+.video-box{
+    flex:1;
+}
+
+.go-live{
+    align-self: center;
+}
+
+.divider{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+

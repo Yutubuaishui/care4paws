@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./UserExploreCommunity.css";
-import PetCareQuiz from "../../../components/CommunityComponent/QuizChallenge"
-import GameInterface from "../../../components/CommunityComponent/Game";
+// import PetCareQuiz from "../../../components/CommunityComponent/QuizChallenge"
+// import GameInterface from "../../../components/CommunityComponent/Game";
 import TrendingSection from "../../../components/CommunityComponent/Trending";
 
 const ExploreCommunity = () => {
@@ -25,18 +25,18 @@ const ExploreCommunity = () => {
     { id: 2, image: "trending2.jpg", caption: "Eco-friendly pet accessories!" },
   ];
 
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  // const [isChatOpen, setIsChatOpen] = useState(false);
 
-  const toggleChatbot = () => {
-    setIsChatOpen((prevState) => !prevState);
-  };
+  // const toggleChatbot = () => {
+  //   setIsChatOpen((prevState) => !prevState);
+  // };
 
-  const ChatbotWindow = () => (
-    <div className="ChatbotWindow">
-      <p>Hello! How can I assist you?</p>
-      {/* Add chatbot interactions here */}
-    </div>
-  );
+  // const ChatbotWindow = () => (
+  //   <div className="ChatbotWindow">
+  //     <p>Hello! How can I assist you?</p>
+  //     {/* Add chatbot interactions here */}
+  //   </div>
+  // );
 
   return (
     <TrendingSection className="trend"/>  

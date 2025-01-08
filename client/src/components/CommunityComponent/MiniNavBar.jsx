@@ -3,11 +3,24 @@ import "./MiniNavBar.css";
 
 function MiniNavBar({ activeTab, setActiveTab }) {
 
+  const role = localStorage.getItem('role');
   const feedTabs = [
-    { id: "myFeed", text: "My Feed" },
-    { id: "exploreCommunity", text: "Explore Community" },
-    { id: "event", text: "Event" },
   ];
+
+  if (role === "user"){
+    feedTabs.push(
+      { id: "myFeed", text: "My Feed" },
+      { id: "exploreCommunity", text: "Explore Community" },
+      { id: "event", text: "Event" },
+    );
+  }
+    else if (role === "coordinator"){
+      feedTabs.push(
+        { id: "myPage", text: "My Page" },
+        { id: "myEvent", text: "My Event" },
+      );
+    }
+    
 
   return (
       <div className="NavTabs">

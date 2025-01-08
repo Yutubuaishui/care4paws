@@ -8,6 +8,10 @@ require("../models/communityPostModel");
 const communityPost =  mongoose.model("communityPost");
 require("../models/commentModel");
 const Comment = mongoose.model("comment");
+require("../models/userModel");
+const User = mongoose.model("User");
+require("../models/eventModel");
+const Event = mongoose.model("Event");
 
 
 router.post('/create-post', verifyToken, async (req, res) => {
@@ -61,16 +65,14 @@ router.get('/fetch-all-post', verifyToken, async(req, res) => {
                 likes: Array.isArray(post.likes) ? post.likes.length : 0,
                 userLikes: post.likes.map(user => user._id),
                 comments: post.comments,
-            })
-        );
-
-            res.json({ posts: transformedPosts });
+            }));
+        res.json({ posts: transformedPosts });
         })
         .catch(err => {
             console.error('Database error:', err);
             res.status(500).json({ error: 'Database error' });
         });
-});
+      });
 
 router.get('/fetch-post/:id', verifyToken, async (req, res) => {
     const { id } = req.params; // Extract the post ID from the URL params
@@ -100,6 +102,92 @@ router.get('/fetch-post/:id', verifyToken, async (req, res) => {
         console.error('Database error:', err);
         res.status(500).json({ error: 'Database error' });
     }
+});
+
+// router.get('/fetch-userfeed/:userId', verifyToken, async (req, res) => {
+//   try {
+//     const user = await User.findById(req.params.userId).populate('following', '_id');
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     const userIds = [user._id, ...user.following.map(followedUser => followedUser._id)];
+//     const posts = await communityPost.find({ postedBy: { $in: userIds } }).sort({ createdAt: -1 });
+//     res.json(posts);
+//   } catch (error) {
+//     console.error("Error fetching posts:", error);
+//     res.status(500).json({ message: 'Internal server error', error: error.message });
+//   }
+// });
+
+router.get('/fetch-userfeed/:userId', verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId).populate('following', '_id');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const userIds = [user._id, ...user.following.map(followedUser => followedUser._id)];
+    const posts = await communityPost.find({ postedBy: { $in: userIds } })
+      .populate('likes', '_id') // Populate likes field
+      .populate('postedBy', 'username avatarSrc') // Populate author field with username and avatarSrc
+      .sort({ createdAt: -1 });
+
+    // Transform the posts
+    const transformedPosts = posts.map(post => ({
+      _id: post._id,
+      caption: post.caption,
+      photo: post.photo,
+      timestamp: post.timestamp,
+      date: post.date,
+      likes: Array.isArray(post.likes) ? post.likes.length : 0,
+      userLikes: Array.isArray(post.likes) ? post.likes.map(user => user._id) : [],
+      comments: Array.isArray(post.comments) ? post.comments.length : 0,
+      postedBy: post.postedBy ? post.postedBy._id : null,
+      username: post.postedBy ? post.postedBy.username : null,
+      avatarSrc: post.postedBy ? post.postedBy.avatarSrc : null,
+    }));
+
+    res.json({ posts: transformedPosts });
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ message: 'Internal server error', error: error.message });
+  }
+});
+
+router.get('/fetch-userpost/:userId', verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    console.log("User1:", user);
+    const posts = await communityPost.find({ postedBy: user._id })
+      .populate('likes', '_id') // Populate likes field
+      .populate('postedBy', 'username avatarSrc') // Populate author field with username and avatarSrc
+      .sort({ createdAt: -1 });
+
+    // Transform the posts
+    const transformedPosts = posts.map(post => ({
+      _id: post._id,
+      caption: post.caption,
+      photo: post.photo,
+      timestamp: post.timestamp,
+      date: post.date,
+      likes: Array.isArray(post.likes) ? post.likes.length : 0,
+      userLikes: Array.isArray(post.likes) ? post.likes.map(user => user._id) : [],
+      comments: Array.isArray(post.comments) ? post.comments.length : 0,
+      postedBy: post.postedBy ? post.postedBy._id : null,
+      username: post.postedBy ? post.postedBy.username : null,
+      avatarSrc: post.postedBy ? post.postedBy.avatarSrc : null,
+    }));
+
+    res.json({ posts: transformedPosts });
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ message: 'Internal server error', error: error.message });
+  }
 });
 
 
@@ -175,7 +263,9 @@ router.get("/fetch-comments/:postId", async (req, res) => {
   
     try {
       // Fetch all comments for the post
-      const comments = await Comment.find({ postId });
+      const comments = await Comment.find({ postId })
+      .populate("author", "username avatarSrc") // Populate only username and avatarSrc
+      .exec();
   
       // Organize comments into a nested structure
       const nestedComments = comments.reduce((acc, comment) => {
@@ -201,20 +291,20 @@ router.get("/fetch-comments/:postId", async (req, res) => {
   });
 
   router.post("/post-comment", async (req, res) => {
-    const { context, author, postId, parentCommentId } = req.body;
+    const { content, author, postId, reply } = req.body;
   
     // Validate required fields
-    if (!context || !author || !postId) {
+    if (!content || !author || !postId) {
       return res.status(400).json({ error: "Missing required fields" });
     }
   
     try {
       // Create the new comment
       const comment = new Comment({
-        context,
+        content,
         author,
         postId,
-        parentCommentId: parentCommentId || null, // Set parentCommentId as null if not provided
+        reply: reply || null, // Set parentCommentId as null if not provided
         timestamp: new Date().toLocaleTimeString(),
         date: new Date().toLocaleDateString(),
       });
@@ -231,44 +321,145 @@ router.get("/fetch-comments/:postId", async (req, res) => {
     }
   });
 
+  router.get('/comments/count/:postId', async (req, res) => {
+    try {
+      const count = await Comment.countDocuments({ postId: req.params.postId });
+      res.json({ count });
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching comment count', error: error.message });
+    }
+  });
 
-// router.put('/comment',verifyToken,(req,res)=>{
-//     const comment = {
-//         text:req.body.text,
-//         postedBy:req.user._id
-//     }
-//     communityPost.findByIdAndUpdate(req.body.postId,{
-//         $push:{comments:comment}
-//     },{
-//         new:true
-//     })
-//     .populate("comments.postedBy","_id name")
-//     .populate("postedBy","_id name")
-//     .exec((err,result)=>{
-//         if(err){
-//             return res.status(422).json({error:err})
-//         }else{
-//             res.json(result)
-//         }
-//     })
-// })
+  router.delete('/delete-post/:postId', async (req, res) => {
+    try {
+      const postId = req.params.postId;
+  
+      // Delete the post
+      const deletedPost = await communityPost.findByIdAndDelete(postId);
+      if (!deletedPost) {
+        return res.status(404).json({ message: 'Post not found' });
+      }
+  
+      // Delete associated comments
+      await Comment.deleteMany({ postId });
+  
+      res.status(200).json({ message: 'Post and associated comments deleted successfully' });
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      res.status(500).json({ message: 'Internal server error', error: error.message });
+    }
+  });
 
-// router.delete('/deletePost/:postId',verifyToken,(req,res)=>{
-//     communityPost.findOne({_id:req.params.postId})
-//     .populate("postedBy","_id")
-//     .exec((err,post)=>{
-//         if(err || !post){
-//             return res.status(422).json({error:err})
-//         }
-//         if(post.postedBy._id.toString() === req.user._id.toString()){
-//               post.remove()
-//               .then(result=>{
-//                   res.json(result)
-//               }).catch(err=>{
-//                   console.log(err)
-//               })
-//         }
-//     })
-// })
+  router.get('/fetch-coordinators', async (req, res) => {
+    try {
+      const coordinators = await User.find({ role: 'coordinator' });
+      res.json(coordinators);
+    } catch (error) {
+      console.error("Error fetching coordinators:", error);
+      res.status(500).json({ message: 'Internal server error', error: error.message });
+    }
+  });
+
+  router.post('/create-event', verifyToken, async (req, res) => {
+    console.log("Request body:", req.body);
+    console.log("User from token:", req.user); // Check if user has _id
+
+    const {
+      eventName,
+      eventPic,
+      eventTags,
+      eventType,
+      eventStatus,
+      eventDate,
+      eventTime,
+      eventLocation,
+      eventFee,
+      eventDescription,
+      eventOrganizer,
+    } = req.body;
+
+    if (!eventName || !eventPic || !eventTags || !eventType || !eventStatus || !eventDate || !eventTime || !eventLocation || !eventFee || !eventDescription || !eventOrganizer) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    if (!eventPic.startsWith("data:image/")) {
+        return res.status(400).json({ error: "Invalid photo format" });
+    }
+
+    try {
+      const event = new Event({
+        eventName,
+        eventPic,
+        eventTags,
+        eventType,
+        eventStatus,
+        eventDate,
+        eventTime,
+        eventLocation,
+        eventFee,
+        eventDescription,
+        eventOrganizer: req.user._id,
+        participantsCount: 0, // Initialize participants count to 0
+      });
+      const savedEvent = await event.save();
+      console.log("savedEvent: ", savedEvent);
+      res.json({ event: savedEvent });
+    } catch (err) {
+        console.error("Error creating event:", err);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+router.get('/fetch-events', verifyToken, async (req, res) => {
+  try {
+      const events = await Event.find({ eventStatus: { $ne: 'Done' } }).populate('eventOrganizer', 'username avatarSrc');
+      const transformedEvents = events.map(event => ({
+        id: event._id,
+        organizerPic: event.eventOrganizer.avatarSrc,
+        organizerName: event.eventOrganizer.username,
+        eventTitle: event.eventName,
+        eventDate: new Date(event.eventDate).toLocaleDateString(),
+        eventTime: event.eventTime,
+        eventLocation: event.eventLocation,
+        eventFee: event.eventFee,
+        participantsCount: event.participantsCount,
+        eventPic: event.eventPic,
+        eventTags: event.eventTags,
+        eventType: event.eventType,
+        registrationStatus: event.eventStatus,
+        eventDescription: event.eventDescription,
+    }));
+    res.json(transformedEvents);
+  } catch (err) {
+      console.error("Error fetching events:", err);
+      res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.get('/fetch-coordinator-events', verifyToken, async (req, res) => {
+  try {
+      const events = await Event.find({ eventOrganizer: req.user._id }).populate('eventOrganizer', 'username avatarSrc');
+      const transformedEvents = events.map(event => ({
+        id: event._id,
+        organizerPic: event.eventOrganizer.avatarSrc,
+        organizerName: event.eventOrganizer.username,
+        eventTitle: event.eventName,
+        eventDate: new Date(event.eventDate).toLocaleDateString(),
+        eventTime: event.eventTime,
+        eventLocation: event.eventLocation,
+        eventFee: event.eventFee,
+        participantsCount: event.participantsCount,
+        eventPic: event.eventPic,
+        eventTags: event.eventTags,
+        eventType: event.eventType,
+        registrationStatus: event.eventStatus,
+        eventDescription: event.eventDescription,
+    }));
+    res.json(transformedEvents);
+  } catch (err) {
+      console.error("Error fetching coordinator events:", err);
+      res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 module.exports = router

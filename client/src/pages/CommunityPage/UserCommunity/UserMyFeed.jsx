@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PostCard } from "../../../components/CommunityComponent/PostCard";
 import "./UserMyFeed.css";
-import { fetchPosts, createPost } from "../../../api";
+import { fetchUserAndFollowedPosts, createPost, fetchUserPosts } from "../../../api";
 import { BiSolidDog } from "react-icons/bi";
 import CommentModal from "../../../components/CommunityComponent/CommentModal";
 
@@ -17,7 +17,17 @@ function MyFeed() {
 
     const loadPosts = async () => {
       try {
-        const posts = await fetchPosts();
+        const userId = localStorage.getItem("userId");
+        const role = localStorage.getItem("role");
+        console.log("current role: ", role);
+        console.log("Fetching posts for user ID:", userId);
+        let posts = [];
+        // if (role ==="user"){
+          posts = await fetchUserAndFollowedPosts(userId);
+        // }else if (role === "coordinator"){
+        //   posts = await fetchUserPosts(userId);
+        // }
+        
         console.log("Fetched posts:", posts);
         setPosts(posts || []); // Fallback to an empty array
       } catch (error) {
@@ -65,8 +75,8 @@ function MyFeed() {
         console.log("Submitting post data:", newPostData);
     
         await createPost(newPostData);
-    
-        const updatedPosts = await fetchPosts();
+        const userId = localStorage.getItem("userId");
+        const updatedPosts = await fetchUserAndFollowedPosts(userId);
         setPosts(updatedPosts);
     
         setNewPost({ text: "", image: null });
@@ -81,11 +91,14 @@ function MyFeed() {
     //handle comment modal
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPost, setSelectedPost] = useState(null);
+    const [modalData, setModalData] = useState(null);
 
-    const openModal = (postId) => {
+    const openModal = (postId, updateCommentCount) => {
       const selected = posts.find((post) => post._id === postId);
+      console.log("Selected post:", selected);
       setSelectedPost(selected);
       setIsModalOpen(true);
+      setModalData({ updateCommentCount });
     };
   
     const closeModal = () => {
@@ -99,6 +112,10 @@ function MyFeed() {
         setIsModalOpen(true);
       }
     }, [selectedPost]);  // This hook will run whenever selectedPost changes
+
+    const handleDeletePost = (postId) => {
+      setPosts(posts.filter(post => post._id !== postId));
+    };
 
   return (
     <>
@@ -141,13 +158,14 @@ function MyFeed() {
             comments={post.comments}
             userLikes={post.userLikes}
             openModal={() => openModal(post._id)}
+            onDelete={handleDeletePost}
           />
         ))
       ) : (
         <p>No posts to display.</p>)}
         </div>
         {isModalOpen && selectedPost && (
-          <CommentModal post={selectedPost} onClose={closeModal} />
+          <CommentModal post={selectedPost} onClose={closeModal} updateCommentCount={modalData} />
         )}
         </div>
     </>

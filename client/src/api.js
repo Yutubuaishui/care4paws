@@ -1,4 +1,5 @@
 import axios from 'axios'; //send HTTP requests
+// import comment from '../../server/src/models/commentModel';
 
 const BASE_URL = 'http://localhost:8080/api';
 
@@ -53,6 +54,42 @@ export const fetchPosts = async () => {
     console.error("Error fetching posts:", error);
     return [];
 }
+};
+
+export const fetchUserAndFollowedPosts = async (userId) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/communityPost/fetch-userfeed/${userId}`, {
+      method: "GET",
+      headers: {
+        Authorization: 'Bearer ' + token, // Include token in headers
+        'Content-Type': 'application/json'
+      },
+    });
+    const data = await response.json();
+    return data.posts;
+  } catch (error) {
+    console.error("Error fetching posts:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const fetchUserPosts = async (userId) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/communityPost/fetch-userpost/${userId}`, {
+      method: "GET",
+      headers: {
+        Authorization: 'Bearer ' + token, // Include token in headers
+        'Content-Type': 'application/json'
+      },
+    });
+    const data = await response.json();
+    return data.posts; // Return the posts array
+  } catch (error) {
+    console.error("Error fetching posts:", error.response?.data || error.message);
+    throw error;
+  }
 };
 
 export const fetchTargetPost = async (postId) => {
@@ -154,22 +191,154 @@ export const likePost = async (_id) => {
   // Controller to fetch comments for a post
   export const fetchPostComments = async (postId) => {
     try {
-      const comments = await Comment.find({ postId }).populate('user', 'username avatarSrc');
-      return comments;
+      const response = await axios.get(`${BASE_URL}/communityPost/fetch-comments/${postId}`);
+      console.log ("fetch response: ", response.data);
+      return response.data;
     } catch (error) {
-      console.error("Error fetching comments:", error);
+      console.error("Error fetching comments:", error.response?.data || error.message);
+      throw error;
     }
   };
   
   // Controller to create a comment (including replies)
   export const createComment = async (data) => {
+    console.log("Comment data:", data);
     try {
-      const comment = new Comment(data);
-      await comment.save();
-      return comment;
+      const response = await axios.post(`${BASE_URL}/communityPost/post-comment`, data);
+      return response.data;
     } catch (error) {
-      console.error("Error creating comment:", error);
+      console.error("Error creating comment:", error.response?.data || error.message);
+      throw error;
+    }
+  };
+
+  export const fetchCommentCount = async (postId) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/communityPost/comments/count/${postId}`);
+      return response.data.count;
+    } catch (error) {
+      console.error("Error fetching comment count:", error.response?.data || error.message);
+      throw error;
     }
   };
   
+  export const deletePost = async (postId) => {
+    try {
+      const response = await axios.delete(`${BASE_URL}/communityPost/delete-post/${postId}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting post:", error.response?.data || error.message);
+      throw error;
+    }
+  };
 
+  export const fetchCoordinators = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/communityPost/fetch-coordinators`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching coordinators:", error.response?.data || error.message);
+      throw error;
+    }
+  };
+
+  export const followUser = async (userId, followerId, followedIds) => {
+    try {
+      if (followedIds.includes(followerId)) {
+        console.log("User is already followed");
+        return { message: "User is already followed" };
+      }
+  
+      console.log("userId: ", userId);
+      console.log("followerId: ", followerId);
+      const response = await axios.post(`${BASE_URL}/users/${userId}/follow`, { followerId });
+      return response.data;
+    } catch (error) {
+      console.error("Error following user:", error.response?.data || error.message);
+      throw error;
+    }
+  };
+  
+  export const unfollowUser = async (userId, followerId) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/users/${userId}/unfollow`, { followerId });
+      return response.data;
+    } catch (error) {
+      console.error("Error unfollowing user:", error.response?.data || error.message);
+      throw error;
+    }
+  };
+
+export const fetchFollowedIds = async (userId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/users/${userId}`);
+    return response.data.following.map(followedUser => followedUser._id);
+  } catch (error) {
+    console.error("Error fetching followed users:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const createEvent = async (eventData) => {
+  console.log("Payload being sent:", eventData);
+  try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${BASE_URL}/communityPost/create-event`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(eventData),
+      });
+      if (!response.ok) {
+          console.log(response);
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+  } catch (error) {
+      console.error("Error creating post:", error);
+      throw error;
+  }
+};
+
+export const fetchEvents = async () => {
+  try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${BASE_URL}/communityPost/fetch-events`, {
+        method: "GET",
+          headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json"
+            },
+          });
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+  } catch (error) {
+      console.error("Error fetching events:", error);
+      throw error;
+  }
+};
+
+export const fetchCoordinatorEvents = async () => {
+  try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${BASE_URL}/communityPost/fetch-coordinator-events`, {
+          method: "GET",
+          headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json"
+          },
+      });
+      console.log(response);
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+  } catch (error) {
+      console.error("Error fetching coordinator events:", error);
+      throw error;
+  }
+};

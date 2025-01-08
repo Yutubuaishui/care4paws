@@ -9,15 +9,11 @@ import Avatar from "../../../assets/account-circle-icon.svg";
 import Cutepic from "../../../assets/Login Page.png";
 import MoveInIcon from "../../../assets/arrow-back-icon.svg";
 import MoveOutIcon from "../../../assets/arrow-forward-icon.svg";
-import EventCard from '../../../components/CommunityComponent/EventCard'
 import MiniNavBar from '../../../components/CommunityComponent/MiniNavBar'
-//import SidebarAndNavbar from '../../../components/SidebarAndNavbar'
-import MyFeed from "../UserCommunity/UserMyFeed";
-import ExploreCommunity from "../UserCommunity/UserExploreCommunity";
 import Event from "../UserCommunity/UserEvent";
-import "./CoordinatorCommunityPage.css"
-import RecommendationBox from "../../../components/CommunityComponent/RecommendationBox";
-
+import "./CoordinatorCommunityPage.css";
+import CoordinatorFeed from "../../../components/CommunityComponent/CoordinatorFeed";
+import "@stream-io/video-react-sdk/dist/css/styles.css";
 
 function CoordinatorCommunityPage() {
 const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -29,15 +25,13 @@ const toggleSidebar = () => {
 };
 
 //state to track which tab is active
-const [activeTab, setActiveTab] = useState("myFeed");
+const [activeTab, setActiveTab] = useState("myPage");
 //function to render the correct content based on activeTab
 const renderTabContent = () => {
   switch (activeTab) {
-    case "myFeed":
-      return <MyFeed />;
-    case "exploreCommunity":
-      return <ExploreCommunity />;
-    case "event":
+    case "myPage":
+      return <CoordinatorFeed />
+    case "myEvent":
       return <Event />;
     default:
       return <div>Tab not found</div>;
@@ -50,7 +44,6 @@ return (
         <div className="navleft">
           <img src={Logo} alt="" className="logo" />
         </div>
-
         <div className="navright">
           <div className="chatNoti">
             <img src={NotificationIcon} alt="" className="notiicon" />
@@ -120,8 +113,6 @@ return (
               {activeTab === "myFeed" && ( // Conditionally render SideContainer
               <div className="SideContainer">
                 <div>
-                  <RecommendationBox />
-                  <RecommendationBox />
                 </div>
               </div>
             )}
