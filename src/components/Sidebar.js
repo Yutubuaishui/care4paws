@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SidebarData } from "./SidebarData";
+import { SidebarC } from "./SidebarC";
 
 import "./SidebarAndNavbar.css";
 
@@ -7,7 +7,7 @@ import Cutepic from "../Assets/Login Page.png";
 import MoveInIcon from "../Assets/arrow-back-icon.svg";
 import MoveOutIcon from "../Assets/arrow-forward-icon.svg";
 
-const SidebarAndNavbar = () => {
+const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -16,7 +16,7 @@ const SidebarAndNavbar = () => {
   return (
     <div className={`sidebar ${isSidebarOpen ? "open" : "closed"}`}>
       <ul className="sidebarList">
-        {SidebarData.map((val, key) => {
+        {SidebarC.map((val, key) => {
           return (
             <li
               key={key}
@@ -52,4 +52,4 @@ const SidebarAndNavbar = () => {
   );
 };
 
-export default SidebarAndNavbar;
+export default Sidebar;

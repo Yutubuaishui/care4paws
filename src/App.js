@@ -14,6 +14,7 @@ import EditProfilePage from "./components/EditProfilePage";
 import EducationPage from "./pages/EducationHub";
 import CreatePostPges from "./pages/CreatePostPage";
 import ContextProvider from "./content/Context";
+import ViewContent from "./pages/EduViewContent";
 
 function App() {
   return (
@@ -46,6 +47,10 @@ function App() {
                   <Route
                     path="/be-pet-experts/create"
                     element={<CreatePostPges />}
+                  />
+                  <Route
+                    path="/be-pet-experts/viewContent/:postId"
+                    element={<ViewContent />}
                   />
                 </Routes>
               </ProtectedRoute>

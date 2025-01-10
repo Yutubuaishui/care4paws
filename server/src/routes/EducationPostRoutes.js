@@ -42,4 +42,33 @@ router.post("/create", verifyToken, (req, res) => {
     });
 });
 
+router.get("/educationContent", async (req, res) => {
+  try {
+    const posts = await EducationPost.find(); // Fetch all education posts
+    res.status(200).json({
+      message: "Fetched education posts successfully.",
+      posts, // Return the posts
+    });
+  } catch (error) {
+    console.error("Error fetching education posts:", error.message);
+    res.status(500).json({
+      error: "Failed to fetch education posts.",
+      details: error.message,
+    });
+  }
+});
+
+router.get("/educationPost/:id", async (req, res) => {
+  try {
+    const post = await EducationPost.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+    res.status(200).json(post);
+  } catch (error) {
+    console.error("Error fetching post by ID:", error.message);
+    res.status(500).json({ message: "Error fetching post" });
+  }
+});
+
 module.exports = router;
