@@ -5,7 +5,7 @@ import "./EduViewContent.css";
 import chatbotpic from "../Assets/Chatbot.jpg";
 import Chatbot from "../components/Chatbot";
 
-const EduViewContent = () => {
+const UserEduViewContent = () => {
   const { postId } = useParams(); // Extract the postId from the URL
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -35,7 +35,7 @@ const EduViewContent = () => {
     return (
       <div>
         <p>Post not found or no data available.</p>
-        <Link to="/coordinator/be-pet-experts">Go Back</Link>
+        <Link to="/user/be-pet-experts">Go Back</Link>
       </div>
     );
   }
@@ -47,7 +47,7 @@ const EduViewContent = () => {
       <div className="post-cardV">
         <h1 className="post-titleV">{post.title}</h1>
         <p className="post-contentV">{post.content}</p>
-        <Link to="/coordinator/be-pet-experts">Back to Posts</Link>
+        <Link to="/user/be-pet-experts">Back to Posts</Link>
       </div>
 
       <div
@@ -67,4 +67,4 @@ const EduViewContent = () => {
   );
 };
 
-export default EduViewContent;
+export default UserEduViewContent;

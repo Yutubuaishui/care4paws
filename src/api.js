@@ -74,7 +74,7 @@ export const getEducationPosts = async (token) => {
 export const getEducationPostById = async (id) => {
   try {
     const response = await fetch(
-      `http://localhost:8082/api/educationPost/${id}`
+      `http://localhost:8082/api/educationPost/educationPost/${id}`
     ); // Fetch post by ID
     if (!response.ok) {
       throw new Error("Failed to fetch post");
@@ -84,5 +84,31 @@ export const getEducationPostById = async (id) => {
   } catch (error) {
     console.error("Error fetching post:", error.message);
     throw new Error("Failed to fetch post");
+  }
+};
+
+export const deleteEducationPost = async (postId, token) => {
+  try {
+    const response = await axios.delete(
+      `http://localhost:8082/api/educationPost/delete/${postId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Pass the JWT token for authentication
+        },
+      }
+    );
+
+    // Ensure the response is successful
+    if (response.status !== 200) {
+      throw new Error("Failed to delete post"); // Or a more specific error based on response status
+    }
+
+    return response.data; // Success response from backend
+  } catch (error) {
+    console.error(
+      "Error deleting education post:",
+      error.response?.data || error.message
+    );
+    throw new Error("Failed to delete education post");
   }
 };

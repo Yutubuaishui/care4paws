@@ -4,12 +4,17 @@
   height: 100vh;
   transition: all 0.3s ease;
   width: 100%; /* Default width is 100% */
+  background-image: url("/src/Assets/petBg.jpg");
+  background-size: 100% 100%;
 }
 
 .post-containerV.chatbot-active {
   width: 50%;
   transition: all 0.3s ease;
+  background-image: url("/src/Assets/petBgVertical.jpg");
+  background-size: 100% 100%;
 }
+
 .post-cardV {
   display: flex;
   flex-direction: column;

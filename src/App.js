@@ -15,6 +15,8 @@ import EducationPage from "./pages/EducationHub";
 import CreatePostPges from "./pages/CreatePostPage";
 import ContextProvider from "./content/Context";
 import ViewContent from "./pages/EduViewContent";
+import UserEducationHub from "./pages/UserEducationHub";
+import UserEduViewContent from "./pages/UserEduViewContent";
 
 function App() {
   return (
@@ -62,7 +64,14 @@ function App() {
               <ProtectedRoute allowedRoles={["user"]}>
                 <Routes>
                   <Route path="" element={<UserDashboard />} />
-                  <Route path="/be-pet-experts" element={<Chatbot />} />
+                  <Route
+                    path="/be-pet-experts"
+                    element={<UserEducationHub />}
+                  />
+                  <Route
+                    path="/be-pet-experts/viewContent/:postId"
+                    element={<UserEduViewContent />}
+                  />
                   <Route path="/view-all-pets" element={<Chatbot />} />
                   <Route path="/edit-profile" element={<EditProfilePage />} />
                 </Routes>

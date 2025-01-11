@@ -71,4 +71,19 @@ router.get("/educationPost/:id", async (req, res) => {
   }
 });
 
+router.delete("/delete/:postId", verifyToken, async (req, res) => {
+  const { postId } = req.params;
+  try {
+    const deletedPost = await EducationPost.findByIdAndDelete(postId);
+    if (!deletedPost) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+    res.status(200).json({ message: "Post deleted successfully" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error deleting post", error: error.message });
+  }
+});
+
 module.exports = router;
