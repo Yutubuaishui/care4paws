@@ -112,3 +112,156 @@ export const deleteEducationPost = async (postId, token) => {
     throw new Error("Failed to delete education post");
   }
 };
+
+export const createCoordinator = async (formData, token) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8082/api/coordinatorDonation/donateDetailsC", // Replace with your actual backend URL
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in headers
+        },
+      }
+    );
+    return response.data; // Success response from the backend
+  } catch (error) {
+    console.error(
+      "Error creating coordinator:",
+      error.response?.data || error.message
+    );
+    throw new Error(
+      error.response?.data?.message || "Failed to create coordinator"
+    );
+  }
+};
+
+export const deleteCoordinatorDetails = async (token) => {
+  try {
+    const response = await axios.delete(
+      "http://localhost:8082/api/coordinatorDonation/deleteDonateDetailsC",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token for authentication
+        },
+      }
+    );
+
+    if (response.status !== 200) {
+      throw new Error("Failed to delete coordinator donation details.");
+    }
+
+    return response.data; // Success response from backend
+  } catch (error) {
+    console.error(
+      "Error deleting coordinator donation details:",
+      error.response?.data || error.message
+    );
+    throw new Error(
+      error.response?.data?.message ||
+        "Failed to delete coordinator donation details"
+    );
+  }
+};
+
+export const donateUser = async (donationData, token) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8082/api/donation/donateUser",
+      donationData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token for authentication
+        },
+      }
+    );
+
+    if (response.status !== 201) {
+      throw new Error("Failed to create user donation.");
+    }
+
+    return response.data; // Success response from backend
+  } catch (error) {
+    console.error(
+      "Error creating user donation:",
+      error.response?.data || error.message
+    );
+    throw new Error(
+      error.response?.data?.message || "Failed to create user donation"
+    );
+  }
+};
+
+export const fetchCoordinators = async (token) => {
+  try {
+    const response = await axios.get(
+      "http://localhost:8082/api/coordinatorDonation/all",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token for authentication
+        },
+      }
+    );
+
+    if (response.status !== 200) {
+      throw new Error("Failed to fetch coordinators.");
+    }
+
+    return response.data.coordinators; // Return the coordinators array
+  } catch (error) {
+    console.error(
+      "Error fetching coordinators:",
+      error.response?.data || error.message
+    );
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch coordinators"
+    );
+  }
+};
+
+// In your api.js file
+export const fetchDonationHistory = async (token) => {
+  try {
+    const response = await axios.get(
+      "http://localhost:8082/api/donation/donationHistory",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data; // Success response from backend
+  } catch (error) {
+    console.error(
+      "Error fetching donation history:",
+      error.response?.data || error.message
+    );
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch donation history"
+    );
+  }
+};
+
+export const fetchCoordinatorDonationHistory = async (token) => {
+  try {
+    const response = await axios.get(
+      "http://localhost:8082/api/donation/coordinatorHistory",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data; // Return donations data
+  } catch (error) {
+    console.error(
+      "Error fetching coordinator donation history:",
+      error.response?.data || error.message
+    );
+    throw new Error(
+      error.response?.data?.message ||
+        "Failed to fetch coordinator donation history"
+    );
+  }
+};

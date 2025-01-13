@@ -8,7 +8,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import CoordinatorDashboard from "./pages/CoordinatorDashboard";
 import UserDashboard from "./pages/UserDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Chatbot from "./components/Chatbot";
+
 // import Homepage from "./components/Homepage";
 import EditProfilePage from "./components/EditProfilePage";
 import EducationPage from "./pages/EducationHub";
@@ -17,6 +17,8 @@ import ContextProvider from "./content/Context";
 import ViewContent from "./pages/EduViewContent";
 import UserEducationHub from "./pages/UserEducationHub";
 import UserEduViewContent from "./pages/UserEduViewContent";
+import UserDonation from "./pages/UserDonation";
+import CoordinatorDonation from "./pages/CoordinatorDonation";
 
 function App() {
   return (
@@ -54,6 +56,7 @@ function App() {
                     path="/be-pet-experts/viewContent/:postId"
                     element={<ViewContent />}
                   />
+                  <Route path="/donation" element={<CoordinatorDonation />} />
                 </Routes>
               </ProtectedRoute>
             }
@@ -72,7 +75,7 @@ function App() {
                     path="/be-pet-experts/viewContent/:postId"
                     element={<UserEduViewContent />}
                   />
-                  <Route path="/view-all-pets" element={<Chatbot />} />
+                  <Route path="/donation" element={<UserDonation />} />
                   <Route path="/edit-profile" element={<EditProfilePage />} />
                 </Routes>
               </ProtectedRoute>

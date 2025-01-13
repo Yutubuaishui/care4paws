@@ -9,6 +9,8 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const communityPostRoutes = require("./routes/communityPostRoutes");
 const educationPostRoutes = require("./routes/EducationPostRoutes");
+const donationRoutes = require("./routes/DonationRoutes");
+const coordinatorDonation = require("./routes/CoordinatorDonationRoutes");
 
 dbConnect();
 
@@ -29,6 +31,8 @@ app.use("/api/auth", authRoutes); //handling authentication, request to /api/aut
 app.use("/api/users", userRoutes); //handling users, users is the API endpoints
 app.use("/api/communityPost", communityPostRoutes); //handling community module
 app.use("/api/educationPost", educationPostRoutes); // Use the new route for education posts
+app.use("/api/donation", donationRoutes);
+app.use("/api/coordinatorDonation", coordinatorDonation);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Care4Paws");
