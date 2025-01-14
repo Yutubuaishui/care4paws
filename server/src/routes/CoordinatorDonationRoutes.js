@@ -100,4 +100,26 @@ router.get("/all", verifyToken, async (req, res) => {
   }
 });
 
+router.get("/Cdetails", verifyToken, async (req, res) => {
+  try {
+    const userId = req.user.id; // Assuming verifyToken adds `user` to the request
+
+    const coordinator = await CoordinatorDetails.findOne({
+      coordinatorId: userId, // Use coordinatorId to match the user's ID
+    }).select("bankAccountNumber bankType bankAccountName");
+
+    if (!coordinator) {
+      return res.status(404).json({ message: "Coordinator details not found" });
+    }
+
+    res.status(200).json({ coordinator });
+  } catch (err) {
+    console.error("Error fetching coordinator details:", err.message);
+    res.status(500).json({
+      message: "Error fetching coordinator details",
+      error: err.message,
+    });
+  }
+});
+
 module.exports = router;

@@ -265,3 +265,25 @@ export const fetchCoordinatorDonationHistory = async (token) => {
     );
   }
 };
+
+export const fetchCoordinatorDetails = async (token) => {
+  try {
+    const response = await axios.get(
+      "http://localhost:8082/api/coordinatorDonation/Cdetails",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data.coordinator; // Return the coordinator details
+  } catch (error) {
+    console.error(
+      "Error fetching coordinator details:",
+      error.response?.data || error.message
+    );
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch coordinator details"
+    );
+  }
+};

@@ -37,6 +37,6 @@ export const SidebarC = [
   {
     title: "Donation",
     icon: <Donationicon />,
-    link: "/coordinator",
+    link: "coordinator/donation",
   },
 ];
