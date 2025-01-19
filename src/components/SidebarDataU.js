@@ -37,6 +37,6 @@ export const SidebarDataU = [
   {
     title: "Donation",
     icon: <Donationicon />,
-    link: "/user/donation",
+    link: "user/donation",
   },
 ];

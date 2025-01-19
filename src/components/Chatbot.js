@@ -3,10 +3,10 @@ import "../components/Chatbot.css";
 import Addicon from "../Assets/add-icon.svg";
 import Chaticon from "../Assets/chat-icon.svg";
 import Menuicon from "../Assets/menu-icon.svg";
-import AddPhotoIcon from "../Assets/add-photo-icon.svg";
+// import AddPhotoIcon from "../Assets/add-photo-icon.svg";
 import Logo from "../Assets/Logo_Care4Paws.png";
 // import ArrowBackIcon from "../Assets/arrow-back-icon.svg";
-import MicIcon from "../Assets/mic-icon.svg";
+// import MicIcon from "../Assets/mic-icon.svg";
 import SendIcon from "../Assets/send-icon.svg";
 import Avatar from "../Assets/account-circle-icon.svg";
 import { Context } from "../content/Context";
@@ -105,8 +105,8 @@ const Chatbot = () => {
               placeholder="Enter a prompt here"
             />
             <div>
-              <img src={AddPhotoIcon} alt="" />
-              <img src={MicIcon} alt="" />
+              {/* <img src={AddPhotoIcon} alt="" />
+              <img src={MicIcon} alt="" /> */}
               <img onClick={() => onSent()} src={SendIcon} alt="" />
             </div>
           </div>

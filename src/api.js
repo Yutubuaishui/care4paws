@@ -116,7 +116,7 @@ export const deleteEducationPost = async (postId, token) => {
 export const createCoordinator = async (formData, token) => {
   try {
     const response = await axios.post(
-      "http://localhost:8082/api/coordinatorDonation/donateDetailsC", // Replace with your actual backend URL
+      "http://localhost:8082/api/coordinatorDonation/donateDetailsC",
       formData,
       {
         headers: {
@@ -136,33 +136,33 @@ export const createCoordinator = async (formData, token) => {
   }
 };
 
-export const deleteCoordinatorDetails = async (token) => {
-  try {
-    const response = await axios.delete(
-      "http://localhost:8082/api/coordinatorDonation/deleteDonateDetailsC",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`, // Include the token for authentication
-        },
-      }
-    );
+// export const deleteCoordinatorDetails = async (token) => {
+//   try {
+//     const response = await axios.delete(
+//       "http://localhost:8082/api/coordinatorDonation/deleteDonateDetailsC",
+//       {
+//         headers: {
+//           Authorization: `Bearer ${token}`, // Include the token for authentication
+//         },
+//       }
+//     );
 
-    if (response.status !== 200) {
-      throw new Error("Failed to delete coordinator donation details.");
-    }
+//     if (response.status !== 200) {
+//       throw new Error("Failed to delete coordinator donation details.");
+//     }
 
-    return response.data; // Success response from backend
-  } catch (error) {
-    console.error(
-      "Error deleting coordinator donation details:",
-      error.response?.data || error.message
-    );
-    throw new Error(
-      error.response?.data?.message ||
-        "Failed to delete coordinator donation details"
-    );
-  }
-};
+//     return response.data; // Success response from backend
+//   } catch (error) {
+//     console.error(
+//       "Error deleting coordinator donation details:",
+//       error.response?.data || error.message
+//     );
+//     throw new Error(
+//       error.response?.data?.message ||
+//         "Failed to delete coordinator donation details"
+//     );
+//   }
+// };
 
 export const donateUser = async (donationData, token) => {
   try {
@@ -219,7 +219,6 @@ export const fetchCoordinators = async (token) => {
   }
 };
 
-// In your api.js file
 export const fetchDonationHistory = async (token) => {
   try {
     const response = await axios.get(

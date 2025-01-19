@@ -34,10 +34,12 @@
 }
 
 .post-contentV {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   color: #555;
   line-height: 1.6;
   margin-bottom: 20px;
+  margin-left: 70px;
+  margin-right: 70px;
 }
 
 .chatbot-toggle-buttonV {

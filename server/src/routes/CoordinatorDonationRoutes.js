@@ -57,29 +57,29 @@ router.post("/donateDetailsC", verifyToken, async (req, res) => {
   }
 });
 
-router.delete("/deleteDonateDetailsC", verifyToken, async (req, res) => {
-  try {
-    const deletedDetails = await CoordinatorDetails.findOneAndDelete({
-      coordinatorId: req.user.id,
-    });
+// router.delete("/deleteDonateDetailsC", verifyToken, async (req, res) => {
+//   try {
+//     const deletedDetails = await CoordinatorDetails.findOneAndDelete({
+//       coordinatorId: req.user.id,
+//     });
 
-    if (!deletedDetails) {
-      return res.status(404).json({
-        message: "No donation details found to delete.",
-      });
-    }
+//     if (!deletedDetails) {
+//       return res.status(404).json({
+//         message: "No donation details found to delete.",
+//       });
+//     }
 
-    res.status(200).json({
-      message: "Coordinator donation details cleared successfully.",
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      message: "Error clearing donation details",
-      error: err.message,
-    });
-  }
-});
+//     res.status(200).json({
+//       message: "Coordinator donation details cleared successfully.",
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({
+//       message: "Error clearing donation details",
+//       error: err.message,
+//     });
+//   }
+// });
 
 router.get("/all", verifyToken, async (req, res) => {
   try {

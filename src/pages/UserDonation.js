@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { donateUser, fetchCoordinators, fetchDonationHistory } from "../api"; // Import the donateUser API function
 import { jwtDecode } from "jwt-decode"; // Correct way to import jwtDecode
+import "./UserDonation.css";
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/SidebarUser";
 
 const UserDonation = () => {
   const [coordinators, setCoordinators] = useState([]);
@@ -94,93 +97,103 @@ const UserDonation = () => {
   };
 
   return (
-    <div>
-      <h2>User Donation</h2>
-      {message && <p>{message}</p>}
-      <form onSubmit={handleDonate}>
-        <div>
-          <label htmlFor="coordinator">Select Coordinator:</label>
-          <select
-            id="coordinator"
-            value={selectedCoordinator?._id || ""}
-            onChange={(e) =>
-              setSelectedCoordinator(
-                coordinators.find((c) => c._id === e.target.value)
-              )
-            }
-            required
-          >
-            <option value="" disabled>
-              Choose a coordinator
-            </option>
-            {coordinators.map((coordinator) => (
-              <option key={coordinator._id} value={coordinator._id}>
-                {coordinator.bankAccountName}
-              </option>
-            ))}
-          </select>
-        </div>
-        {selectedCoordinator && (
-          <div>
-            <p>Account Number: {selectedCoordinator.bankAccountNumber}</p>
-            <p>Bank Type: {selectedCoordinator.bankType}</p>
-            <p>Account Name: {selectedCoordinator.bankAccountName}</p>
+    <div className="UserDonation">
+      <Navbar />
+      <div className="UserDonationSideBar">
+        <Sidebar />
+        <div className="UserDonationContent">
+          <div className="UDonationForm">
+            <h2>User Donation</h2>
+            {message && <p>{message}</p>}
+            <form onSubmit={handleDonate}>
+              <div>
+                <label htmlFor="coordinator">Select Coordinator:</label>
+                <select
+                  id="coordinator"
+                  value={selectedCoordinator?._id || ""}
+                  onChange={(e) =>
+                    setSelectedCoordinator(
+                      coordinators.find((c) => c._id === e.target.value)
+                    )
+                  }
+                  required
+                >
+                  <option value="" disabled>
+                    Choose a coordinator
+                  </option>
+                  {coordinators.map((coordinator) => (
+                    <option key={coordinator._id} value={coordinator._id}>
+                      {coordinator.bankAccountName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {selectedCoordinator && (
+                <div>
+                  <p>Account Number: {selectedCoordinator.bankAccountNumber}</p>
+                  <p>Bank Type: {selectedCoordinator.bankType}</p>
+                  <p>Account Name: {selectedCoordinator.bankAccountName}</p>
+                </div>
+              )}
+              <div>
+                <label htmlFor="amount">Amount:</label>
+                <input
+                  type="number"
+                  id="amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="paymentMethod">Payment Method:</label>
+                <select
+                  id="paymentMethod"
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  required
+                >
+                  <option value="" disabled>
+                    Choose a payment method
+                  </option>
+                  <option value="Online Banking">Online Banking</option>
+                  <option value="Credit Card">Credit Card</option>
+                  <option value="PayPal">PayPal</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="phoneNumber">Phone Number:</label>
+                <input
+                  type="text"
+                  id="phoneNumber"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit">Donate</button>
+            </form>
           </div>
-        )}
-        <div>
-          <label htmlFor="amount">Amount:</label>
-          <input
-            type="number"
-            id="amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            required
-          />
+          <div className="UDonationHistory">
+            <h3>Your Donation History</h3>
+            {donations.length > 0 ? (
+              <ul>
+                {donations.map((donation) => (
+                  <li key={donation._id}>
+                    You have donated RM{donation.amount} to{" "}
+                    {donation.coordinator.id.bankAccountName} via{" "}
+                    {donation.paymentMethod} on{" "}
+                    {new Date(donation.createdAt).toLocaleString()} (Phone:{" "}
+                    {donation.phoneNumber})
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No donation history found.</p>
+            )}
+          </div>
         </div>
-        <div>
-          <label htmlFor="paymentMethod">Payment Method:</label>
-          <select
-            id="paymentMethod"
-            value={paymentMethod}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-            required
-          >
-            <option value="" disabled>
-              Choose a payment method
-            </option>
-            <option value="Online Banking">Online Banking</option>
-            <option value="Credit Card">Credit Card</option>
-            <option value="PayPal">PayPal</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="phoneNumber">Phone Number:</label>
-          <input
-            type="text"
-            id="phoneNumber"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Donate</button>
-      </form>
-      <h3>Your Donation History</h3>
-      {donations.length > 0 ? (
-        <ul>
-          {donations.map((donation) => (
-            <li key={donation._id}>
-              You have donated RM{donation.amount} to{" "}
-              {donation.coordinator.id.bankAccountName} via{" "}
-              {donation.paymentMethod} on{" "}
-              {new Date(donation.createdAt).toLocaleString()} (Phone:{" "}
-              {donation.phoneNumber})
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No donation history found.</p>
-      )}
+      </div>
     </div>
   );
 };
